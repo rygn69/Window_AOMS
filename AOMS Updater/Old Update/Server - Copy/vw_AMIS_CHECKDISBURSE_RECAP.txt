@@ -1,0 +1,8 @@
+SELECT DISTINCT 
+                      TOP (100) PERCENT [Account Code], SUM(Credit) AS SumCredit, SUM(Debit) AS SumDebit, FndType, Actioncode, MONTH(CheckDate) AS month_, 
+                      YEAR(CheckDate) AS Year_, AccountName
+FROM         dbo.vw_AMIS_CheckDisbursement
+WHERE     (Actioncode = 1) OR
+                      (Actioncode = 5)
+GROUP BY [Account Code], FndType, MONTH(CheckDate), YEAR(CheckDate), Actioncode, AccountName
+ORDER BY [Account Code]

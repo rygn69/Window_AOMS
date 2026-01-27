@@ -1,0 +1,41 @@
+[APPINFO]
+Name="ADS AOMS"
+Version="1.1.65"
+Company="Provincial Government of Agusan del Sur"
+Homepage="http://Agusandelsur.gov.ph"
+ShowLicense=1
+LicenseFile="C:\Documents and Settings\mAR pAUL\Desktop\My Program\ADS_AOMS\License.txt"
+Reboot=0
+Destination="<ProgramFiles>\<AppName>"
+SerialCheck=0
+SerialFile=""
+PackageDest="C:\My Setups"
+[ANNOUNCEMENT]
+CAV=1
+CA=0
+A=0
+AV=0
+[BUILD]
+Web=0
+CDDVD=1
+Compression=1
+[FILELIST]
+Destination0="<InstallRoot>\ADS_AOMS.exe"
+Source0="C:\Documents and Settings\mAR pAUL\Desktop\My Program\ADS_AOMS.exe"
+Package0="Required Files"
+Destination1="<InstallRoot>\setup.exe"
+Source1="C:\Documents and Settings\mAR pAUL\Desktop\My Program\ADS_AOMS\Package\setup.exe"
+Package1="Required Files"
+[COMPATIBILITY]
+All=1
+Custom=0
+Win95=1
+Win98=1
+WinME=1
+WinNT4=1
+Win2000=1
+WinXP=1
+Unknown=1
+WinNET2003=1
+[PACKAGES]
+Package0="Required Files"

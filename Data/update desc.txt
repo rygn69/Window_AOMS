@@ -1,0 +1,9 @@
+History:
+----------------------------------------------------------------------------------
+Version 1.2.213
+1. New update for Incoming and log Out transaction  with new GUI and User friendly..
+2. Remove Pre-Audit logout filtering for Jev preparation.
+----------------------------------------------------------------------------------
+Version 1.2.214
+----------------------------------------------------------------------------------
+1. Inhancement for all JEV preparation Module( Programming code : replace Debit and credit into sum(debit) as Debit and sum(credit) as Credit) to  merge the Accounts in one row that causing Data redundancy

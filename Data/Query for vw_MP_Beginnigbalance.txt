@@ -1,0 +1,25 @@
+SELECT     dbo.tblReff_CodeClassification.ID, dbo.tblReff_CodeClassification.Subcode1, dbo.tblReff_CodeClassification.SubDesc1, 
+                      dbo.tblReff_CodeClassification.Subcode2, dbo.tblReff_CodeClassification.SubDesc2, dbo.tblReff_CodeClassification.Subcode3, 
+                      dbo.tblReff_CodeClassification.SubDesc3, dbo.tblReff_CodeClassification.Subcode4, dbo.tblReff_CodeClassification.SubDesc4, 
+                      dbo.tblReff_CodeClassification.Subcode5, dbo.tblReff_CodeClassification.SubDesc5, dbo.tblReff_CodeClassification.Subcode6, 
+                      dbo.tblReff_CodeClassification.SubDesc6, dbo.tblReff_CodeClassification.Subcode7, dbo.tblReff_CodeClassification.SubDesc7, 
+                      dbo.tblReff_CodeClassification.Actioncode, dbo.tblReff_CodeClassification.lvl, SUM(b.Debit) AS SDebit, SUM(b.Credit) AS SCredit, b.Accountcode, 
+                      b.Fundcode
+FROM         dbo.tblReff_CodeClassification LEFT OUTER JOIN
+                      dbo.tblAMIS_Begeningbalance AS b ON CASE lvl WHEN 0 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) WHEN 1 THEN rtrim(ltrim(CONVERT(nchar, 
+                      subCode1))) WHEN 2 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) 
+                      WHEN 3 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode3))) 
+                      WHEN 4 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode3))) 
+                      + '-' + rtrim(ltrim(CONVERT(nchar, subCode4))) WHEN 5 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) 
+                      + '-' + rtrim(ltrim(CONVERT(nchar, subCode3))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode4))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode5))) 
+                      WHEN 6 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode3))) 
+                      + '-' + rtrim(ltrim(CONVERT(nchar, subCode4))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode5))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode6))) 
+                      WHEN 7 THEN rtrim(ltrim(CONVERT(nchar, subCode1))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode2))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode3))) 
+                      + '-' + rtrim(ltrim(CONVERT(nchar, subCode4))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode5))) + '-' + rtrim(ltrim(CONVERT(nchar, subCode6))) 
+                      + '-' + rtrim(ltrim(CONVERT(nchar, subCode7))) END LIKE RTRIM(LTRIM(b.Accountcode))
+GROUP BY dbo.tblReff_CodeClassification.ID, dbo.tblReff_CodeClassification.Subcode1, dbo.tblReff_CodeClassification.SubDesc1, 
+                      dbo.tblReff_CodeClassification.Subcode2, dbo.tblReff_CodeClassification.SubDesc2, dbo.tblReff_CodeClassification.Subcode3, 
+                      dbo.tblReff_CodeClassification.SubDesc3, dbo.tblReff_CodeClassification.Subcode4, dbo.tblReff_CodeClassification.SubDesc4, 
+                      dbo.tblReff_CodeClassification.Subcode5, dbo.tblReff_CodeClassification.SubDesc5, dbo.tblReff_CodeClassification.Subcode6, 
+                      dbo.tblReff_CodeClassification.SubDesc6, dbo.tblReff_CodeClassification.Subcode7, dbo.tblReff_CodeClassification.SubDesc7, 
+                      dbo.tblReff_CodeClassification.Actioncode, dbo.tblReff_CodeClassification.lvl, b.Accountcode, b.Fundcode

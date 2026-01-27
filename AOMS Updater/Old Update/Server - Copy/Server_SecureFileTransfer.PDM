@@ -1,0 +1,99 @@
+[Root]
+Most Recent Package=AOMS Updater
+
+
+[Package|AOMS Updater|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Updater Installer
+
+[Package|AOMS Updater|Configure DAO ISAMs]
+Applicable=No
+
+[Package|AOMS Updater|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|AOMS Updater|Files Found]
+
+[Package|AOMS Updater|Files Released]
+
+[Package|AOMS Updater|Missing Dependency Information]
+F:\mARP pAUL\drivers\lvButton.ocx=
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\ebCrypt.dll=
+
+[Package|AOMS Updater|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\MSCOMCTL.OCX=
+
+[Package|AOMS Updater|Files Added]
+
+[Package|AOMS Updater|Files Removed]
+
+[Package|AOMS Updater|Files In Project]
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Update.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\WINDOWS\system32\oleaut32.dll=Yes
+C:\WINDOWS\system32\olepro32.dll=Yes
+C:\WINDOWS\system32\asycfilt.dll=Yes
+C:\WINDOWS\system32\stdole2.tlb=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\ebCrypt.dll=Yes
+C:\WINDOWS\system32\MSWINSCK.OCX=Yes
+C:\WINDOWS\system32\MSCOMCTL.OCX=Yes
+F:\mARP pAUL\drivers\lvButton.ocx=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\Vb6stkit.dll=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|AOMS Updater|Configure Registry Files]
+Applicable=No
+
+[Package|AOMS Updater|Configure Remote Servers]
+Applicable=No
+
+[Package|AOMS Updater|Install Locations]
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Update.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\oleaut32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\olepro32.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\asycfilt.dll=$(WinSysPathSysFile)
+C:\WINDOWS\system32\stdole2.tlb=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\ebCrypt.dll=$(WinSysPath)
+C:\WINDOWS\system32\MSWINSCK.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCTL.OCX=$(WinSysPath)
+F:\mARP pAUL\drivers\lvButton.ocx=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\Vb6stkit.dll=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|AOMS Updater|Configure Shared Files]
+Applicable=Yes
+C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Update.exe=Yes
+
+[Package|AOMS Updater|Distribution]
+Type=single
+Size=
+Title=Accounting Operation Management System Updater
+
+[Package|AOMS Updater|IconGroups]
+Group0=Accounting Operation Management System Updater
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|AOMS Updater|Accounting Operation Management System Updater]
+Icon1=Update.exe
+Title1=Accounting Operation Management System Updater
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|AOMS Updater|Package]
+PackageFolder=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Updater Installer
+ProjectFolder=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server
+ServerSideCab=
+File1=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Updater Installer\setup.exe
+File2=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Updater Installer\Setup.Lst
+File3=C:\Documents and Settings\mAR pAUL\Desktop\eXTRA\file Transfer\Server\Updater Installer\Update.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz

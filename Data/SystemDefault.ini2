@@ -1,0 +1,17 @@
+[Database Type]
+SSS=ƒpu}h<8;6?<625;2
+LLL=ynwdiq
+PPP=iHŠE7D]Bt?QEy>I;+7z692A
+
+
+[Location]
+avis=\Avis
+log=\LogHistory 
+
+;syncronize System Clock with Server
+;Vista mode=0, XP mode=1
+[TimeSync]
+mode=1
+
+[SEM]
+mode=1

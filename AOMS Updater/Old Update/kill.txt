@@ -1,0 +1,1 @@
+taskkill /im "Accounting Operation Management System(62).exe" /F /T

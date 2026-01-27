@@ -1,0 +1,12 @@
+Line 19: Class BlinkingLabel.ctlblink of control ctlblink1 was not a loaded control class.
+Line 40: Class DevPowerFlatBttn.FlatBttn of control FlatBttn1 was not a loaded control class.
+Line 25: The property name _ExtentX in ctlblink1 is invalid.
+Line 26: The property name _ExtentY in ctlblink1 is invalid.
+Line 27: The property name Caption in ctlblink1 is invalid.
+Line 37: The property name ForeColor1 in ctlblink1 is invalid.
+Line 38: The property name Interval in ctlblink1 is invalid.
+Line 46: The property name _ExtentX in FlatBttn1 is invalid.
+Line 47: The property name _ExtentY in FlatBttn1 is invalid.
+Line 49: The property name Caption in FlatBttn1 is invalid.
+Line 60: The property name TextColor in FlatBttn1 is invalid.
+Line 61: The property name Object.ToolTipText in FlatBttn1 is invalid.

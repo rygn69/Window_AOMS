@@ -1,0 +1,2 @@
+Problem running post-installer step. Installation may not complete correctly
+the database cluster initialisation failed
