@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
 Begin VB.Form frmJEVPreparation_New 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "JEV Preparation"
@@ -701,7 +701,7 @@ Begin VB.Form frmJEVPreparation_New
             _ExtentX        =   450
             _ExtentY        =   661
             _Version        =   393216
-            Format          =   143589377
+            Format          =   57081857
             CurrentDate     =   40631
          End
          Begin VB.CommandButton Command4 
@@ -1258,15 +1258,15 @@ Begin VB.Form frmJEVPreparation_New
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   14685
       _ExtentX        =   25903
-      _ExtentY        =   1482
-      ButtonWidth     =   1058
-      ButtonHeight    =   1429
+      _ExtentY        =   1508
+      ButtonWidth     =   1138
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -1539,7 +1539,7 @@ End Sub
 Private Sub btnParticular_Click()
     CUFlag = True
     txtparticular.Locked = False
-    cmbrc.Locked = False
+    cmbRC.Locked = False
     rcedit = True
 End Sub
 
@@ -1553,7 +1553,7 @@ sql = "Exec Proc_JevPrinting @dvno = '" & txtDVNo.Text & "'"
     'Debug.Print sql
     ReportName = "JEVNEW"
     rptJEVNew.txtClaimDesc.SetText txtparticular.Text & ", " & txtClaimant.Text & ", " & txtAlobs.Text
-    rptJEVNew.txtRC.SetText cmbrc.Text
+    rptJEVNew.txtRC.SetText cmbRC.Text
     rptJEVNew.txtClerk.SetText getUserName(ActiveUserID, "FullName")
     rptJEVNew.Text23.SetText GetEmpPosition(ActiveUserID)
     If optCash.Value = True Then: rptJEVNew.Trantype = 3
@@ -1981,7 +1981,7 @@ Dim x As Integer
     If Drec.RecordCount > 0 Then
         txtClaimant.Text = getClaimant(IIf(IsNull(Drec!ClaimantCode), 0, Drec!ClaimantCode))
         txtClaimantCode = IIf(IsNull(Drec!ClaimantCode), 0, Drec!ClaimantCode)
-        cmbrc.Text = GetOfficeName(Drec!RCenter, "OfficeMedium")
+        cmbRC.Text = GetOfficeName(Drec!RCenter, "OfficeMedium")
         txtparticular.Text = Drec!Particular
         txtFund.Text = Drec!FundType
         txtAmount.Text = Format(Drec![Gamount], "#,##0.00")
@@ -2298,9 +2298,9 @@ Dim xType As Integer, coloraly_signal As Integer
                                     End If
                                     EditCount = False
                                 If CUFlag = True Then
-                                    opndbaseFMIS.Execute "Update [tblAMIS_IncomingDVTrns] set [Particular]='" & Trim(Replace(txtparticular.Text, "'", "''")) & "', [ClaimantCode]='" & txtClaimantCode.Text & "',RCENTER = " & cmbrc.ItemData(cmbrc.ListIndex) & " Where DVNo='" & Trim(txtDVNo.Text) & "' And ActionCode=1"
+                                    opndbaseFMIS.Execute "Update [tblAMIS_IncomingDVTrns] set [Particular]='" & Trim(Replace(txtparticular.Text, "'", "''")) & "', [ClaimantCode]='" & txtClaimantCode.Text & "',RCENTER = " & cmbRC.ItemData(cmbRC.ListIndex) & " Where DVNo='" & Trim(txtDVNo.Text) & "' And ActionCode=1"
                                     txtparticular.Locked = True
-                                    cmbrc.Locked = True
+                                    cmbRC.Locked = True
                                     rcedit = False
                                 End If
                                 
@@ -2340,7 +2340,7 @@ End Sub
 Private Function ChkEntry() As Boolean
 Dim Gamount As Double
     ChkEntry = False
-    If Trim(txtDVNo.Text) <> "" And txtAlobs.Text <> "" And txtClaimant.Text <> "" And cmbrc.Text <> "" And txtparticular.Text <> "" And txtFund.Text <> "" And txtAmount.Text <> "" Then
+    If Trim(txtDVNo.Text) <> "" And txtAlobs.Text <> "" And txtClaimant.Text <> "" And cmbRC.Text <> "" And txtparticular.Text <> "" And txtFund.Text <> "" And txtAmount.Text <> "" Then
         If xDebit = xCredit And xDebit > 0 Then
                 If (optOther.Value = True Or optCash.Value = True) And (Trim(txtAlobs.Text) = "Liquidation of Cash Advance" Or Trim(txtAlobs.Text) = "Recoupment") Then
                     ChkEntry = True
@@ -2719,7 +2719,7 @@ Dim xAlreadyJEV As String
                             txtAlobs.Text = xObR
                             txtClaimant.Text = getClaimant(DVRec!ClaimantCode)
                             txtClaimantCode.Text = DVRec!ClaimantCode
-                            cmbrc.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
+                            cmbRC.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
                             txtparticular.Text = DVRec!Particular
                             txtFund.Text = DVRec!FundType
                             txtAmount.Text = Format(DVRec!Gamount, "#,##0.00")
@@ -2762,13 +2762,13 @@ Public Sub LoadOffice()
 Dim OREc As New ADODB.Recordset
 Dim x As Integer
 
-cmbrc.Clear
+cmbRC.Clear
 
 OREc.Open ("Select distinct * FRom tblREF_AIS_Offices Order By [OfficeMedium]"), opndbaseFMIS, adOpenStatic, adLockOptimistic
 If OREc.RecordCount > 0 Then
     For x = 1 To OREc.RecordCount
-        cmbrc.AddItem OREc![OfficeMedium]
-        cmbrc.ItemData(cmbrc.NewIndex) = OREc!fmisofficeid
+        cmbRC.AddItem OREc![OfficeMedium]
+        cmbRC.ItemData(cmbRC.NewIndex) = OREc!fmisofficeid
         OREc.MoveNext
     Next x
 End If

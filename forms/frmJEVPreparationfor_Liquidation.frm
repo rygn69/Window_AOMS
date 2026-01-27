@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
 Begin VB.Form frmJEVPreparationfor_Liquidation 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "JEV Preparation for Liquidation of Cash Advance"
@@ -761,7 +761,7 @@ Begin VB.Form frmJEVPreparationfor_Liquidation
             _ExtentX        =   450
             _ExtentY        =   661
             _Version        =   393216
-            Format          =   134348801
+            Format          =   57081857
             CurrentDate     =   40631
          End
          Begin VB.CommandButton Command4 
@@ -1318,15 +1318,15 @@ Begin VB.Form frmJEVPreparationfor_Liquidation
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   14685
       _ExtentX        =   25903
-      _ExtentY        =   1482
+      _ExtentY        =   1508
       ButtonWidth     =   1032
-      ButtonHeight    =   1429
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -1613,8 +1613,8 @@ End Sub
 
 Private Sub btnParticular_Click()
     CUFlag = True
-    txtParticular.Locked = False
-    cmbrc.Locked = False
+    txtparticular.Locked = False
+    cmbRC.Locked = False
     rcedit = True
 End Sub
 
@@ -1627,8 +1627,8 @@ sql = "Exec Proc_JevPOSTEDPrinting @JEvno = '" & txt_Jevno.Text & "'"
     
     'Debug.Print sql
     ReportName = "JEVNEW"
-    rptJEVNew.txtClaimDesc.SetText txtParticular.Text & ", " & txtClaimant.Text & ", " & txtAlobs.Text
-    rptJEVNew.txtRC.SetText cmbrc.Text
+    rptJEVNew.txtClaimDesc.SetText txtparticular.Text & ", " & txtClaimant.Text & ", " & txtAlobs.Text
+    rptJEVNew.txtRC.SetText cmbRC.Text
     rptJEVNew.txtClerk.SetText getUserName(ActiveUserID, "FullName")
     rptJEVNew.Text23.SetText GetEmpPosition(ActiveUserID)
      rptJEVNew.txtJEVNo.SetText Trim(txt_Jevno.Text)
@@ -1897,8 +1897,8 @@ Dim rec As New ADODB.Recordset
 JevOk = False
 frmPOstdate.Show 1
 If JevOk = True Then
-rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 4,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & cmb_fundtype.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
-txt_Jevno.Text = cmb_fundtype.ItemData(cmb_fundtype.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-" & Format(4, "00") & "-" & Format(Trim(rec.Fields!MAXJEVSERIES), "0000")
+rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 4,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & Cmb_fundtype.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+txt_Jevno.Text = Cmb_fundtype.ItemData(Cmb_fundtype.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-" & Format(4, "00") & "-" & Format(Trim(rec.Fields!MAXJEVSERIES), "0000")
 rec.Close
 Else
 MsgBox "Cannot Generate the System JEV Number,If you cancel to Set the Date", vbInformation, "System Message"
@@ -1928,7 +1928,7 @@ Dim aa
     
     Me.Top = (Screen.Height - Me.Height) / 2
     Me.Left = (Screen.Width - Me.Width) / 2
-     Call LoadFundType(cmb_fundtype)
+     Call LoadFundType(Cmb_fundtype)
     Call Toolbar1_ButtonClick(Toolbar1.Buttons.Item(1))
     
     ActiveUserID = Trim(ActiveUserID)
@@ -2068,7 +2068,7 @@ Dim Drec As New ADODB.Recordset
 Dim x As Integer
      
     CUFlag = False
-    txtParticular.Locked = True
+    txtparticular.Locked = True
     xNAcode = ""
     Edited = True
     lblMode.Caption = "EDIT"
@@ -2080,14 +2080,14 @@ Dim x As Integer
         If CInt(optOther.Tag) = Drec![Transtype] Then optOther.Value = True
        
         txtClaimant.Text = getClaimant(IIf(IsNull(Drec!ClaimantCode), 0, Drec!ClaimantCode))
-        txtclaimantcode = IIf(IsNull(Drec!ClaimantCode), 0, Drec!ClaimantCode)
-        cmbrc.Text = GetOfficeName(Drec!RCenter, "OfficeMedium")
-        txtParticular.Text = Drec!Particular
+        txtClaimantCode = IIf(IsNull(Drec!ClaimantCode), 0, Drec!ClaimantCode)
+        cmbRC.Text = GetOfficeName(Drec!RCenter, "OfficeMedium")
+        txtparticular.Text = Drec!Particular
         txtFund.Text = Drec!FundType
         txtAmount.Text = Format(Drec![Gamount], "#,##0.00")
         txt_Jevno.Text = Drec!jevno
         EditCount = False
-        cmb_fundtype.Text = Trim(Drec!FundType)
+        Cmb_fundtype.Text = Trim(Drec!FundType)
             xObR = GetNonAlobsName(Drec!obrno)
             xNAcode = Drec!obrno
         If cmb_trnYear.Text <> Format(Drec!jevdate, "yyyy") Or cmb_month.ItemData(cmb_month.ListIndex) <> CInt(Format(Drec!jevdate, "MM")) Then
@@ -2329,8 +2329,8 @@ On Error GoTo bad
                 txtDVNo.Text = ""
                 txtAlobs.Text = ""
                 txtClaimant.Text = ""
-                txtclaimantcode.Text = ""
-                txtParticular.Text = ""
+                txtClaimantCode.Text = ""
+                txtparticular.Text = ""
                 txtFund.Text = ""
                 txtAmount.Text = ""
                 txtJEVNo.Text = ""
@@ -2357,7 +2357,7 @@ On Error GoTo bad
             If optCollection.Value = True Then
             MsgBox "Select Transaction Type", vbInformation, "System Message"
             Else
-                        If cmb_fundtype.Text = "" Then
+                        If Cmb_fundtype.Text = "" Then
                             MsgBox "Please Specify the Special Accounts", vbCritical, "System Confirmation"
                             Exit Sub
                         End If
@@ -2385,9 +2385,9 @@ On Error GoTo bad
                              End If
                                     EditCount = False
                                 If CUFlag = True Then
-                                    opndbaseFMIS.Execute "Update [tblAMIS_IncomingDVTrns] set [Particular]='" & Trim(Replace(txtParticular.Text, "'", "''")) & "', [ClaimantCode]='" & txtclaimantcode.Text & "',RCENTER = " & cmbrc.ItemData(cmbrc.ListIndex) & " Where DVNo='" & Trim(txtDVNo.Text) & "' And ActionCode=1"
-                                    txtParticular.Locked = True
-                                    cmbrc.Locked = True
+                                    opndbaseFMIS.Execute "Update [tblAMIS_IncomingDVTrns] set [Particular]='" & Trim(Replace(txtparticular.Text, "'", "''")) & "', [ClaimantCode]='" & txtClaimantCode.Text & "',RCENTER = " & cmbRC.ItemData(cmbRC.ListIndex) & " Where DVNo='" & Trim(txtDVNo.Text) & "' And ActionCode=1"
+                                    txtparticular.Locked = True
+                                    cmbRC.Locked = True
                                     rcedit = False
                                 End If
                                 
@@ -2399,7 +2399,7 @@ On Error GoTo bad
                                     UpdateCA
                                 End If
                                 'Call Saved2FinalJEV("", "", "", txtParticular.Text, txt_JEVno.Text, txtClaimantCode, "", txtAmount.Text, "", "", 4, "", txtDVNo.Text, "", "", "", "", "", "", ExtractJEVSNo(txt_JEVno.Text), DatePost, "")
-                                Call GEtCompleteJEVDetails(txtDVNo.Text, "liquidation", "", "", "", txtParticular.Text, txt_Jevno.Text, txtclaimantcode, "", txtAmount.Text, 0, 0, 4, "", txtDVNo.Text, "", cmb_fundtype.Text, "", "", "", "", ExtractJEVSNo(txt_Jevno.Text), DatePost, "")
+                                Call GEtCompleteJEVDetails(txtDVNo.Text, "liquidation", "", "", "", txtparticular.Text, txt_Jevno.Text, txtClaimantCode, "", txtAmount.Text, 0, 0, 4, "", txtDVNo.Text, "", Cmb_fundtype.Text, "", "", "", "", ExtractJEVSNo(txt_Jevno.Text), DatePost, "")
                               Call Toolbar1_ButtonClick(Toolbar1.Buttons.Item(1))
                             End If
                         Else
@@ -2443,7 +2443,7 @@ End Function
 Private Function ChkEntry() As Boolean
 Dim Gamount As Double
     ChkEntry = False
-    If Trim(txtDVNo.Text) <> "" And txtAlobs.Text <> "" And txtClaimant.Text <> "" And cmbrc.Text <> "" And txtParticular.Text <> "" And cmb_fundtype.Text <> "" And txtAmount.Text <> "" And txt_Jevno.Text <> "" Then
+    If Trim(txtDVNo.Text) <> "" And txtAlobs.Text <> "" And txtClaimant.Text <> "" And cmbRC.Text <> "" And txtparticular.Text <> "" And Cmb_fundtype.Text <> "" And txtAmount.Text <> "" And txt_Jevno.Text <> "" Then
         If xDebit = xCredit And xDebit > 0 Then
                 If (optOther.Value = True Or optCash.Value = True) And (Trim(txtAlobs.Text) = "Liquidation of Cash Advance" Or Trim(txtAlobs.Text) = "Recoupment") Then
                     ChkEntry = True
@@ -2791,7 +2791,7 @@ Dim xAlreadyJEV As String
     If KeyAscii = 13 Then
         btnReturn.Enabled = False
         CUFlag = False
-        txtParticular.Locked = True
+        txtparticular.Locked = True
         xNAcode = ""
         txtDVNo.Text = Trim(txtDVNo.Text)
         If ChkDVIfLiquidation(txtDVNo.Text) = True Then
@@ -2809,13 +2809,13 @@ Dim xAlreadyJEV As String
                             
                             txtAlobs.Text = xObR
                             txtClaimant.Text = getClaimant(DVRec!ClaimantCode)
-                            txtclaimantcode.Text = DVRec!ClaimantCode
-                            cmbrc.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
-                            txtParticular.Text = DVRec!Particular
+                            txtClaimantCode.Text = DVRec!ClaimantCode
+                            cmbRC.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
+                            txtparticular.Text = DVRec!Particular
                             If Trim(DVRec!FundType) = "Eco" Then
-                            cmb_fundtype.ListIndex = 0
+                            Cmb_fundtype.ListIndex = 0
                             Else
-                            cmb_fundtype.Text = GetFundName(DVRec!FundType)
+                            Cmb_fundtype.Text = GetFundName(DVRec!FundType)
                             End If
                             txtAmount.Text = Format(DVRec!Gamount, "#,##0.00")
                             optCollection.Value = True
@@ -2855,13 +2855,13 @@ Public Sub LoadOffice()
 Dim OREc As New ADODB.Recordset
 Dim x As Integer
 
-cmbrc.Clear
+cmbRC.Clear
 
 OREc.Open ("Select distinct * FRom tblREF_AIS_Offices Order By [OfficeMedium]"), opndbaseFMIS, adOpenStatic, adLockOptimistic
 If OREc.RecordCount > 0 Then
     For x = 1 To OREc.RecordCount
-        cmbrc.AddItem OREc![OfficeMedium]
-        cmbrc.ItemData(cmbrc.NewIndex) = OREc!fmisofficeid
+        cmbRC.AddItem OREc![OfficeMedium]
+        cmbRC.ItemData(cmbRC.NewIndex) = OREc!fmisofficeid
         OREc.MoveNext
     Next x
 End If

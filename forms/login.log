@@ -1,9 +1,2 @@
-Line 16: Property Picture in frmUserPassword had an invalid file reference.
-Line 34: Property Caption in Label3 must be a quoted string
-Line 78: Property Picture in picLogo had an invalid file reference.
-Line 92: Property Picture in log_pic had an invalid file reference.
-Line 184: Property Image in FlatBttn1 had an invalid file reference.
-Line 213: Property Image in FlatBttn2 had an invalid file reference.
-Line 304: Property Picture in Image2 had an invalid file reference.
-Line 319: Property Picture in Image1 had an invalid file reference.
-Line 345: Property Picture in imgPicture had an invalid file reference.
+Line 159: Class lvButton.lvButtons_H of control FlatBttn1 was not a loaded control class.
+Line 189: Class lvButton.lvButtons_H of control FlatBttn2 was not a loaded control class.

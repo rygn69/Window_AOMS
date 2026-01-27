@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
 Begin VB.Form frm_POReg 
    BorderStyle     =   1  'Fixed Single
@@ -142,15 +142,15 @@ Begin VB.Form frm_POReg
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   7
       Top             =   0
       Width           =   13140
       _ExtentX        =   23178
-      _ExtentY        =   1482
-      ButtonWidth     =   1058
-      ButtonHeight    =   1429
+      _ExtentY        =   1508
+      ButtonWidth     =   1138
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -838,7 +838,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
              txtFund.Visible = True
              txtOOE.Visible = True
 
-             cmbrc.Visible = False
+             cmbRC.Visible = False
              cmbOOE.Visible = False
              cmbFund.Visible = False
              'cmbNonAlobs.Visible = False
@@ -889,13 +889,13 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
                                           If cnt > 0 Then ' more than 1 obrno
                                             If XFlag = True And txtOffice.Text = "" And txtOOE.Text = "" Then 'continuing
-                                                opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing,OBR2,moreobr) Values ('" & txtDVNo.Text & "','" & Left(Trim(txtObR.Text), 19) & "','" & txtFund.Text & "'," & cmbrc.ItemData(cmbrc.ListIndex) & "," & Mid(txtObR.Text, 5, 4) & ",'" & cmbOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ",'" & Mid(Trim(txtObR.Text), 21, 2000) & "',1)"
+                                                opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing,OBR2,moreobr) Values ('" & txtDVNo.Text & "','" & Left(Trim(txtObR.Text), 19) & "','" & txtFund.Text & "'," & cmbRC.ItemData(cmbRC.ListIndex) & "," & Mid(txtObR.Text, 5, 4) & ",'" & cmbOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ",'" & Mid(Trim(txtObR.Text), 21, 2000) & "',1)"
                                             Else 'current
                                                 opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing,OBR2,moreobr) Values ('" & txtDVNo.Text & "','" & Left(Trim(txtObR.Text), 19) & "','" & txtFund.Text & "'," & txtOfficeCode.Text & "," & Mid(txtObR.Text, 5, 4) & ",'" & txtOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ",'" & Mid(Trim(txtObR.Text), 21, 2000) & "',1)"
                                             End If
                                           Else ' 1 obrno
                                             If XFlag = True And txtOffice.Text = "" And txtOOE.Text = "" Then 'continuing
-                                                opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing) Values ('" & txtDVNo.Text & "','" & Trim(txtObR.Text) & "','" & txtFund.Text & "'," & cmbrc.ItemData(cmbrc.ListIndex) & "," & Mid(txtObR.Text, 5, 4) & ",'" & cmbOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ")"
+                                                opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing) Values ('" & txtDVNo.Text & "','" & Trim(txtObR.Text) & "','" & txtFund.Text & "'," & cmbRC.ItemData(cmbRC.ListIndex) & "," & Mid(txtObR.Text, 5, 4) & ",'" & cmbOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ")"
                                             Else 'current
                                                 opndbaseFMIS.Execute "Insert Into tblAMIS_IncomingDVTrns (DVNo,ObrNo,FundType,RCenter,RCenterCode,OOE,ClaimantCode,Particular,GAmount,TransactionDate,UserID,Actioncode,DateTimeEntered,Continuing) Values ('" & txtDVNo.Text & "','" & Trim(txtObR.Text) & "','" & txtFund.Text & "'," & txtOfficeCode.Text & "," & Mid(txtObR.Text, 5, 4) & ",'" & txtOOE.Text & "','" & txtClaimantCode.Text & "','" & Trim(Replace(txtDetail.Text, "'", "''")) & "'," & CCur(txtAmount.Text) & ",'" & Format(txtDate.Text, "mm/dd/yyyy") & "','" & ActiveUserID & "',10,'" & Format(Now, "mm/dd/yyyy hh:mm:ss AMPM") & "'," & IIf(XFlag, 1, 0) & ")"
                                             End If
@@ -923,14 +923,14 @@ ChkEntry = False
 If Trim(txtClaimant.Text) <> "" And Trim(txtClaimantCode.Text) <> "" And Trim(txtDVNo.Text) <> "" Then
     
     If cmbFund.Visible = True Then 'non obr
-        If cmbNonAlobs.ListIndex <> -1 And cmbFund.Text <> "" And cmbrc.ListIndex <> -1 And cmbOOE.Text <> "" Then
+        If cmbNonAlobs.ListIndex <> -1 And cmbFund.Text <> "" And cmbRC.ListIndex <> -1 And cmbOOE.Text <> "" Then
             ChkEntry = True
         Else
             ChkEntry = False
         End If
     Else 'with obr
-        If cmbrc.Visible = True Then 'continuing
-            If txtFund.Text <> "" And cmbrc.ListIndex <> -1 And cmbOOE.Text <> "" Then
+        If cmbRC.Visible = True Then 'continuing
+            If txtFund.Text <> "" And cmbRC.ListIndex <> -1 And cmbOOE.Text <> "" Then
                 ChkEntry = True
             Else
                 ChkEntry = False
@@ -1167,10 +1167,10 @@ Set OREc = Nothing
 If XFlag = True And txtOffice.Text = "" And txtOOE.Text = "" Then
     
     txtOffice.Visible = False
-    cmbrc.Width = txtOffice.Width
-    cmbrc.Left = txtOffice.Left
-    cmbrc.Top = txtOffice.Top
-    cmbrc.Visible = True
+    cmbRC.Width = txtOffice.Width
+    cmbRC.Left = txtOffice.Left
+    cmbRC.Top = txtOffice.Top
+    cmbRC.Visible = True
 
     txtOOE.Visible = False
     cmbOOE.Width = txtOOE.Width

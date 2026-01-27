@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
 Begin VB.Form frmUserPassword 
    BackColor       =   &H00004080&
    BorderStyle     =   1  'Fixed Single
@@ -12,6 +12,7 @@ Begin VB.Form frmUserPassword
    Icon            =   "login.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Picture         =   "login.frx":09EA
@@ -96,6 +97,22 @@ Begin VB.Form frmUserPassword
       TabIndex        =   4
       Top             =   1900
       Width           =   6195
+      Begin VB.TextBox Text2 
+         Height          =   375
+         Left            =   1800
+         TabIndex        =   17
+         Text            =   "Text2"
+         Top             =   1800
+         Width           =   855
+      End
+      Begin VB.TextBox Text1 
+         Height          =   495
+         Left            =   1800
+         TabIndex        =   16
+         Text            =   "Text1"
+         Top             =   1080
+         Width           =   735
+      End
       Begin VB.TextBox SwipeIDNo_txt 
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
@@ -590,3 +607,6 @@ If KeyCode = 13 Then
 End If
 End Sub
 
+Private Sub Text1_Change()
+Text2.Text = mydll.Decrypt(UCase(Text1.Text))
+End Sub

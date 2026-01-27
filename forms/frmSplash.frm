@@ -358,6 +358,7 @@ Exit Sub
 handler:
 MsgBox err.description
 End Sub
+
 Private Sub Timer1_Timer()
 Dim ResolutionChange As Integer
 Dim ServerTimeSync As Integer

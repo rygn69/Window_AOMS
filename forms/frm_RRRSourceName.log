@@ -1,2 +1,12 @@
-Line 56: Class MSComctlLib.ListView of control LstAccountcode was not a loaded control class.
-Line 226: Class MSComctlLib.ImageList of control itb32x32 was not a loaded control class.
+Line 114: Class lvButton.lvButtons_H of control lvButtons_H1 was not a loaded control class.
+Line 142: Class lvButton.lvButtons_H of control lvButtons_H2 was not a loaded control class.
+Line 171: Class lvButton.lvButtons_H of control lvButtons_H3 was not a loaded control class.
+Line 198: Class lvButton.lvButtons_H of control lvButtons_H4 was not a loaded control class.
+Line 317: Class lvButton.lvButtons_H of control lvButtons_H5 was not a loaded control class.
+Line 345: Class lvButton.lvButtons_H of control lvButtons_H6 was not a loaded control class.
+Line 373: Class lvButton.lvButtons_H of control lvButtons_H7 was not a loaded control class.
+Line 401: Class lvButton.lvButtons_H of control lvButtons_H8 was not a loaded control class.
+Line 429: Class lvButton.lvButtons_H of control lvButtons_H10 was not a loaded control class.
+Line 456: Class lvButton.lvButtons_H of control lvButtons_H9 was not a loaded control class.
+Line 483: Class lvButton.lvButtons_H of control lvButtons_H11 was not a loaded control class.
+Line 510: Class lvButton.lvButtons_H of control lvButtons_H12 was not a loaded control class.

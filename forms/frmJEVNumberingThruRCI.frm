@@ -1,8 +1,8 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{1693405E-2DC9-4248-B52F-4AC9145DA2AF}#1.0#0"; "WinXPC Engine.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFlxGrd.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{1693405E-2DC9-4248-B52F-4AC9145DA2AF}#1.0#0"; "WinXPCEngine.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
 Begin VB.Form frmJEVNumberingThruRCI 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "JEV Numbering for Check Disbursement Report"
@@ -397,7 +397,7 @@ Begin VB.Form frmJEVNumberingThruRCI
             Strikethrough   =   0   'False
          EndProperty
          CustomFormat    =   "MMMM yyyy"
-         Format          =   2097155
+         Format          =   57081859
          UpDown          =   -1  'True
          CurrentDate     =   38240
       End
@@ -497,15 +497,15 @@ Begin VB.Form frmJEVNumberingThruRCI
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   1
       Top             =   0
       Width           =   14370
       _ExtentX        =   25347
-      _ExtentY        =   1482
-      ButtonWidth     =   2249
-      ButtonHeight    =   1429
+      _ExtentY        =   1508
+      ButtonWidth     =   2328
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -836,8 +836,8 @@ If opnURChk.RecordCount <> 0 Then
     Do Until opnURChk.EOF
         DoEvents
         grd_details.TextMatrix(opnURChk.AbsolutePosition, 0) = opnURChk!Trnno
-        grd_details.TextMatrix(opnURChk.AbsolutePosition, 1) = IIf(Val(opnURChk!YearObligated) = 0, "", opnURChk!YearObligated)
-        grd_details.TextMatrix(opnURChk.AbsolutePosition, 2) = IIf(Val(opnURChk!YearObligated) = 0, "", Format(opnURChk!CheckDate, "m/d/yy"))
+        grd_details.TextMatrix(opnURChk.AbsolutePosition, 1) = IIf(val(opnURChk!YearObligated) = 0, "", opnURChk!YearObligated)
+        grd_details.TextMatrix(opnURChk.AbsolutePosition, 2) = IIf(val(opnURChk!YearObligated) = 0, "", Format(opnURChk!CheckDate, "m/d/yy"))
         grd_details.TextMatrix(opnURChk.AbsolutePosition, 3) = opnURChk!checkno
         grd_details.TextMatrix(opnURChk.AbsolutePosition, 4) = opnURChk!released
         
@@ -863,7 +863,7 @@ If opnURChk.RecordCount <> 0 Then
        ' Text1.Text = Val(CCur(opnURChk!CheckAmount))
 '         If grd_details.TextMatrix(grd_details.Row, 9) = "Amount" Then
 '         Else
-         Text1.Text = CCur(Val(Text1.Text)) + CCur(Val(opnURChk!CheckAmount))
+         Text1.Text = CCur(val(Text1.Text)) + CCur(val(opnURChk!CheckAmount))
         ' End If
         opnURChk.MoveNext
        
@@ -954,7 +954,7 @@ Label13.Refresh
 Animation1.Visible = True
 Animation1.Open App.path & AViLocation & "\horizontaloading.avi"
 Animation1.Play
-Call JEVMassNumbering(cmb_fundtype.Text)
+Call JEVMassNumbering(Cmb_fundtype.Text)
 Label13.Caption = ""
 Animation1.Stop
 Animation1.Close
@@ -974,7 +974,7 @@ Dim last As String
     
 
 'LastJEVSNno = GetLatestSNoForJEV(ConvertFullFundtoMedium(FundType), DTPicker1.Year, DTPicker1.Month)
- rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 2,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & cmb_fundtype.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+ rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 2,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & Cmb_fundtype.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
  LastJEVSNno = rec.Fields!MAXJEVSERIES
  rec.Close
 For cc = 1 To grd_details.Rows - 2
@@ -984,7 +984,7 @@ For cc = 1 To grd_details.Rows - 2
 
     If Trim(grd_details.TextMatrix(cc, 4)) = "1" Or Trim(grd_details.TextMatrix(cc, 4)) = "2" Then
             
-            grd_details.TextMatrix(cc, 14) = cmb_fundtype.ItemData(cmb_fundtype.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-02-" & Format(LastJEVSNno, "00000")
+            grd_details.TextMatrix(cc, 14) = Cmb_fundtype.ItemData(Cmb_fundtype.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-02-" & Format(LastJEVSNno, "00000")
             LastJEVSNno = LastJEVSNno + 1
             
 '        opnJEV.Close
@@ -1025,7 +1025,7 @@ End Sub
 Private Sub Command3_Click()
 Label13.Caption = "Loading, Please wait..."
 Label13.Refresh
-Call LoadSavedReportNos(DTPicker1.Month, DTPicker1.Year, cmb_fundtype.Text)
+Call LoadSavedReportNos(DTPicker1.Month, DTPicker1.Year, Cmb_fundtype.Text)
 Label13.Caption = ""
 
 End Sub
@@ -1061,7 +1061,7 @@ DTPicker1.Value = Month(Date) & "/1/" & Year(Date)
 Label13.Caption = ""
 Label14.Caption = ""
 Timer1.Enabled = True
-Call LoadFundType(cmb_fundtype)
+Call LoadFundType(Cmb_fundtype)
 End Sub
 Public Sub LoadFund(ByVal cmb As ComboBox)
 Dim opnfund As New ADODB.Recordset
@@ -1233,7 +1233,7 @@ If grd_details.TextMatrix(grd_details.Row, 4) = 1 Or grd_details.TextMatrix(grd_
     'Load_FundTypes '---loads functypes to the FUNDTYPE combo - RICHARD
    ' If Len(grd_details.TextMatrix(grd_details.Row, 14)) <> 0 Then 'Kung Naa nay JEV No
     frmjev.IsSaveAccntng = False
-    If Trim(frmjev.cmbrc.Text) = "" And Trim(frmjev.txt_FundType) = "" Then
+    If Trim(frmjev.cmbRC.Text) = "" And Trim(frmjev.txt_FundType) = "" Then
         '---set components for old transacted vouchers
 
       '  ---passing the transaction to JEV Prepartion Form if Old Transaction---'
@@ -1241,14 +1241,14 @@ If grd_details.TextMatrix(grd_details.Row, 4) = 1 Or grd_details.TextMatrix(grd_
             .MSFlexGrid1.Clear
             .ptv = Trim(grd_details.TextMatrix(grd_details.Row, 5))
             .IfNew = True
-            .fundcode = cmb_fundtype.ItemData(cmb_fundtype.ListIndex)
-            .FundType = cmb_fundtype.Text
+            .fundcode = Cmb_fundtype.ItemData(Cmb_fundtype.ListIndex)
+            .FundType = Cmb_fundtype.Text
             .Ttype = 2
             .Date_ = grd_details.TextMatrix(grd_details.Row, 2)
             .RCI = List1.List(List1.ListIndex)
             .checkno = grd_details.TextMatrix(grd_details.Row, 3)
            ' .Particular = grd_details.TextMatrix(grd_details.Row, 8)
-            .FTYPE = cmb_fundtype.Text
+            .FTYPE = Cmb_fundtype.Text
             .ptvNo = grd_details.TextMatrix(grd_details.Row, 5)
             .whatfield = "DVNO"
             .Uno = grd_details.TextMatrix(grd_details.Row, 0)
@@ -1257,7 +1257,7 @@ If grd_details.TextMatrix(grd_details.Row, 4) = 1 Or grd_details.TextMatrix(grd_
            ' .Toolbar1_ButtonClick .Toolbar1.Buttons.Item(1)
             .txt_DVNo.Text = GetDVNobyChkNo(grd_details.TextMatrix(grd_details.Row, 3))
             .txt_Jevno.Text = grd_details.TextMatrix(grd_details.Row, 14)
-            .txt_FundType.Text = fundmedium(Trim(cmb_fundtype))
+            .txt_FundType.Text = fundmedium(Trim(Cmb_fundtype))
            .txtDate.Text = Format(grd_details.TextMatrix(grd_details.Row, 2), "mmmm dd, yyyy")
             .txtDate.Locked = False
             
@@ -1273,7 +1273,7 @@ If grd_details.TextMatrix(grd_details.Row, 4) = 1 Or grd_details.TextMatrix(grd_
                 End If
            ' GetOfficeName(DRec!RCenter, "OfficeMedium")
             
-            .cmbrc.Locked = False
+            .cmbRC.Locked = False
            ' frmjev.cmbRC.Visible = False
             .txt_AlobsNo.Locked = False
             .Show 1
@@ -1285,14 +1285,14 @@ If grd_details.TextMatrix(grd_details.Row, 4) = 1 Or grd_details.TextMatrix(grd_
         
         With frmjev
             .ptv = Trim(grd_details.TextMatrix(grd_details.Row, 5))
-            .fundcode = cmb_fundtype.ItemData(cmb_fundtype.ListIndex)
-            .FundType = cmb_fundtype.Text
+            .fundcode = Cmb_fundtype.ItemData(Cmb_fundtype.ListIndex)
+            .FundType = Cmb_fundtype.Text
             .Ttype = 2
             .Date_ = grd_details.TextMatrix(grd_details.Row, 2)
             .RCI = List1.List(List1.ListIndex)
             .checkno = grd_details.TextMatrix(grd_details.Row, 3)
             '.Particular = grd_details.TextMatrix(grd_details.Row, 8)
-            .FTYPE = cmb_fundtype.Text
+            .FTYPE = Cmb_fundtype.Text
             .ptvNo = grd_details.TextMatrix(grd_details.Row, 5)
             .whatfield = "DVNO"
             .Uno = grd_details.TextMatrix(grd_details.Row, 0)
@@ -1321,14 +1321,14 @@ Else
             frmjev.IsSaveAccntng = False
             With frmjev
                 .ptv = Trim(grd_details.TextMatrix(grd_details.Row, 5))
-                .fundcode = cmb_fundtype.ItemData(cmb_fundtype.ListIndex)
-                .FundType = cmb_fundtype.Text
+                .fundcode = Cmb_fundtype.ItemData(Cmb_fundtype.ListIndex)
+                .FundType = Cmb_fundtype.Text
                 .Ttype = 2
                 .Date_ = grd_details.TextMatrix(grd_details.Row, 2)
                 .RCI = List1.List(List1.ListIndex)
                 .checkno = grd_details.TextMatrix(grd_details.Row, 3)
                 .Particular = grd_details.TextMatrix(grd_details.Row, 8)
-                .FTYPE = cmb_fundtype.Text
+                .FTYPE = Cmb_fundtype.Text
                 .ptvNo = grd_details.TextMatrix(grd_details.Row, 5)
                 .whatfield = "DVNO"
                 .Uno = grd_details.TextMatrix(grd_details.Row, 0)

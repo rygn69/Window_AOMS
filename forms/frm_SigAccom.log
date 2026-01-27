@@ -1,3 +1,2 @@
-Line 18: Class MSHierarchicalFlexGridLib.MSHFlexGrid of control MSHFlexGrid1 was not a loaded control class.
-Line 48: Class MSComCtl2.DTPicker of control DTPicker1 was not a loaded control class.
-Line 69: Class MSComCtl2.DTPicker of control DTPicker2 was not a loaded control class.
+Line 87: Class lvButton.lvButtons_H of control Command1 was not a loaded control class.
+Line 119: Class lvButton.lvButtons_H of control btnCancel was not a loaded control class.

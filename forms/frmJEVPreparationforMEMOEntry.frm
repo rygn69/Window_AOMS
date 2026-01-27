@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
 Begin VB.Form frmJEVPreparationforMemoEntry 
    Appearance      =   0  'Flat
    BorderStyle     =   1  'Fixed Single
@@ -627,15 +627,15 @@ Begin VB.Form frmJEVPreparationforMemoEntry
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   11565
       _ExtentX        =   20399
-      _ExtentY        =   1482
+      _ExtentY        =   1508
       ButtonWidth     =   1085
-      ButtonHeight    =   1429
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -849,7 +849,7 @@ Begin VB.Form frmJEVPreparationforMemoEntry
       _ExtentX        =   450
       _ExtentY        =   661
       _Version        =   393216
-      Format          =   271319041
+      Format          =   57081857
       CurrentDate     =   40631
    End
    Begin VB.Label Label16 
@@ -1122,10 +1122,10 @@ End Sub
 Private Sub btnParticular_Click()
     CUFlag = True
     
-    If txtParticular.Locked = True Then
-    txtParticular.Locked = False
+    If txtparticular.Locked = True Then
+    txtparticular.Locked = False
     Else
-    txtParticular.Locked = True
+    txtparticular.Locked = True
     End If
     
 End Sub
@@ -1155,9 +1155,9 @@ If Edited = True Then
 '            "WHERE (dbo.tblREF_AIS_ChartofAccounts.FundType ='" & GetFundName(txtFund.Text) & "') AND (dbo.tblAMIS_JournalEntry.DVNo ='" & List1.Text & "')"
 '
     'Debug.Print sql
-    sql = "select * from vw_MP_JevPreperCollection where fundtype ='" & GetFundName(txtfund.Text) & "' AND (ptvno ='" & Me.txtDVNo.Text & "') and (actioncode = 1 or actioncode = 5)"
+    sql = "select * from vw_MP_JevPreperCollection where fundtype ='" & GetFundName(txtFund.Text) & "' AND (ptvno ='" & Me.txtDVNo.Text & "') and (actioncode = 1 or actioncode = 5)"
     ReportName = "JEV"
-    rptJEVCollection.txtClaimDesc.SetText txtParticular.Text & ", " & txtClaimant.Text & ", " & txtAlobs.Text
+    rptJEVCollection.txtClaimDesc.SetText txtparticular.Text & ", " & txtClaimant.Text & ", " & txtAlobs.Text
     rptJEVCollection.txtRC.SetText txtRC.Text
     rptJEVCollection.txtClerk.SetText getUserName(ActiveUserID, "FullName")
     
@@ -1294,32 +1294,32 @@ Dim Lastno As Double
 JevOk = False
 frmPOstdate.Show 1
 If JevOk = True Then
-    rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 5,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & txtfund.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    rec.Open ("EXEC [dbo].[Proc_GetMaxJevSeries_New] @transtype = 5,@jevyeardate = '" & DatePost & "' ,@fundtype = '" & txtFund.Text & "'"), opndbaseFMIS, adOpenStatic, adLockOptimistic
         Lastno = rec.Fields!MAXJEVSERIES
     rec.Close
     
-    txtJEVNo.Text = txtfund.ItemData(txtfund.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-" & "05" & "-" & Format(Lastno, "0000")
+    txtJEVNo.Text = txtFund.ItemData(txtFund.ListIndex) & "-" & Right(Year(DatePost), 2) & "-" & Format(Month(DatePost), "00") & "-" & "05" & "-" & Format(Lastno, "0000")
 End If
 End Sub
 
 Private Sub DTPicker1_CallbackKeyDown(ByVal KeyCode As Integer, ByVal Shift As Integer, ByVal CallbackField As String, CallbackDate As Date)
-txtdate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
+txtDate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
 End Sub
 
 Private Sub DTPicker1_Change()
-txtdate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
+txtDate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
 End Sub
 
 Private Sub DTPicker1_Click()
-txtdate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
+txtDate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
 End Sub
 
 Private Sub Form_Load()
     Call SetGrid
     ActiveUserID = Trim(ActiveUserID)
     DTPicker1.Value = Now
-    txtdate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
-    Call LoadFundType(txtfund)
+    txtDate.Text = Format(DTPicker1.Value, "MM/dd/yyyy")
+    Call LoadFundType(txtFund)
 End Sub
 Private Sub SetGrid()
 Dim cc As Integer
@@ -1356,20 +1356,20 @@ Private Sub List1_Click()
 End Sub
 
 Private Sub LoadJEVDetails(ByVal dvno As String)
-Dim DRec As New ADODB.Recordset
+Dim Drec As New ADODB.Recordset
 Dim x As Integer
     
     CUFlag = False
-    txtParticular.Locked = True
+    txtparticular.Locked = True
     xNAcode = ""
     Edited = True
     lblMode.Caption = "EDIT"
-    DRec.Open ("Select * From [tblAMIS_COllectionDepositt] Where [ptvno]='" & dvno & "' And (ActionCode=1 or ActionCode=5)"), opndbaseFMIS, adOpenStatic, adLockOptimistic
-    If DRec.RecordCount > 0 Then
+    Drec.Open ("Select * From [tblAMIS_COllectionDepositt] Where [ptvno]='" & dvno & "' And (ActionCode=1 or ActionCode=5)"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    If Drec.RecordCount > 0 Then
         
-        txtDVNo.Text = DRec![ptvNo]
+        txtDVNo.Text = Drec![ptvNo]
         'txtJEVNo.Text = DRec!JEVNo
-        txtdate.Text = DRec![TransDate]
+        txtDate.Text = Drec![TransDate]
         'txtParticular.Text = DRec!Particular
         'txtFund.Text = GetFundMedium(DRec!FundCode)
         'txtAmount.Text = DRec!Amount
@@ -1386,45 +1386,45 @@ Dim x As Integer
 '        End If
     
     End If
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
         
-    DRec.Open ("Select * FRom tblCMS_CDCheckBook where DVNo='" & txtDVNo.Text & "' and ActionCode=1"), opndbaseFMIS, adOpenStatic, adLockOptimistic
-    If DRec.RecordCount > 0 Then
+    Drec.Open ("Select * FRom tblCMS_CDCheckBook where DVNo='" & txtDVNo.Text & "' and ActionCode=1"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    If Drec.RecordCount > 0 Then
     
-       txtAlobs.Text = DRec!chknumber
+       txtAlobs.Text = Drec!chknumber
         ' txtClaimant.Text = GetClaimant(DVRec!ClaimantCode)
          'txtClaimantCode.Text = DVRec!ClaimantCode
         ' txtRC.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
-         txtParticular.Text = DRec!Particular
-         txtfund.Text = GetFundMedium(DRec!fundcode)
-         txtAmount.Text = DRec!amount
+         txtparticular.Text = Drec!Particular
+         txtFund.Text = GetFundMedium(Drec!fundcode)
+         txtAmount.Text = Drec!amount
     End If
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
 '
     Call SetGrid
     'DRec.Close
-    DRec.Open ("Select * From [tblAMIS_COllectionDepositt] Where [ptvno]='" & dvno & "' And (ActionCode=1 or actioncode=5)"), opndbaseFMIS, adOpenStatic, adLockOptimistic
-    If DRec.RecordCount > 0 Then
-        For x = 1 To DRec.RecordCount
-            MSFlexGrid1.TextMatrix(x, 0) = DRec![FmisAccntCode]
-            MSFlexGrid1.TextMatrix(x, 1) = GetAccountCodeByFMISAccountCode(DRec![FmisAccntCode])
-            MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByFMISAccountCode(DRec![FmisAccntCode])
-            If DRec![debitcredit] = 0 Then
-                MSFlexGrid1.TextMatrix(x, 4) = DRec!amount
+    Drec.Open ("Select * From [tblAMIS_COllectionDepositt] Where [ptvno]='" & dvno & "' And (ActionCode=1 or actioncode=5)"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    If Drec.RecordCount > 0 Then
+        For x = 1 To Drec.RecordCount
+            MSFlexGrid1.TextMatrix(x, 0) = Drec![FmisAccntCode]
+            MSFlexGrid1.TextMatrix(x, 1) = GetAccountCodeByFMISAccountCode(Drec![FmisAccntCode])
+            MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByFMISAccountCode(Drec![FmisAccntCode])
+            If Drec![debitcredit] = 0 Then
+                MSFlexGrid1.TextMatrix(x, 4) = Drec!amount
             Else
-                MSFlexGrid1.TextMatrix(x, 3) = DRec!amount
+                MSFlexGrid1.TextMatrix(x, 3) = Drec!amount
             End If
-            If LCase(Trim(lblMode)) = "edit" Then MSFlexGrid1.TextMatrix(x, 5) = DRec!ActionCode  ' for coloraly purpose
-            DRec.MoveNext
+            If LCase(Trim(lblMode)) = "edit" Then MSFlexGrid1.TextMatrix(x, 5) = Drec!ActionCode  ' for coloraly purpose
+            Drec.MoveNext
         Next x
         Call GetSum
     End If
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
     
-    Call LoadAccountsByFund(Trim(txtfund.Text))
+    Call LoadAccountsByFund(Trim(txtFund.Text))
 
 End Sub
 
@@ -1439,9 +1439,9 @@ If Trim(txtJEVNo.Text) = "" Then
     MsgBox "JEV Number is Empty, Please Specify..!", vbInformation, "System Information"
     Exit Sub
 End If
-If Trim(txtParticular.Text) <> "" Then
+If Trim(txtparticular.Text) <> "" Then
     With frmSub3
-        .reff = txtJEVNo.Text
+        .REFF = txtJEVNo.Text
         .Gamount = txtAmount.Text
         .CName = "N/A"
         .isEdit = True
@@ -1453,71 +1453,71 @@ If Trim(txtParticular.Text) <> "" Then
 End If
 End Sub
 Public Sub GetAccntngEntries()
-Dim DRec As New ADODB.Recordset
+Dim Drec As New ADODB.Recordset
 Dim x As Integer
 Call SetGrid
     'DRec.Close
     If IsSaveAccntng = False Then
-        Set DRec = opndbaseFMIS.Execute("Select left(ChildAccountcode,3) as childcode,sum(Debit) as sumdebit,sum(credit) as sumcredit From tblAMIS_AccoutingEntries Where [reffno]='" & txtJEVNo.Text & "' And (ActionCode=1) group by reffno,actioncode,left(ChildAccountcode,3)")
-        If DRec.RecordCount > 0 Then
-            For x = 1 To DRec.RecordCount
+        Set Drec = opndbaseFMIS.Execute("Select left(ChildAccountcode,3) as childcode,sum(Debit) as sumdebit,sum(credit) as sumcredit From tblAMIS_AccoutingEntries Where [reffno]='" & txtJEVNo.Text & "' And (ActionCode=1) group by reffno,actioncode,left(ChildAccountcode,3)")
+        If Drec.RecordCount > 0 Then
+            For x = 1 To Drec.RecordCount
     '            MSFlexGrid1.TextMatrix(x, 0) = DRec![Trnno]
-                MSFlexGrid1.TextMatrix(x, 1) = DRec!childcode
-                MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByAccountcode(DRec!childcode)
-                MSFlexGrid1.TextMatrix(x, 4) = IIf((Format(DRec!sumCredit, "#,##0.00") = "0.00"), "", Format(DRec!sumCredit, "#,##0.00"))
-                MSFlexGrid1.TextMatrix(x, 3) = IIf((Format(DRec!sumDebit, "#,##0.00") = "0.00"), "", Format(DRec!sumDebit, "#,##0.00"))
+                MSFlexGrid1.TextMatrix(x, 1) = Drec!childcode
+                MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByAccountcode(Drec!childcode)
+                MSFlexGrid1.TextMatrix(x, 4) = IIf((Format(Drec!sumCredit, "#,##0.00") = "0.00"), "", Format(Drec!sumCredit, "#,##0.00"))
+                MSFlexGrid1.TextMatrix(x, 3) = IIf((Format(Drec!sumDebit, "#,##0.00") = "0.00"), "", Format(Drec!sumDebit, "#,##0.00"))
               MSFlexGrid1.Rows = MSFlexGrid1.Rows + 1
                ' If LCase(Trim(lblMode.Caption)) = "edit" Then MSFlexGrid1.TextMatrix(x, 5) = DRec!ActionCode  ' for coloraly purpose
-                DRec.MoveNext
+                Drec.MoveNext
             Next x
         Else
         IsSaveAccntng = True
         Call GetAccntngEntries
         End If
     Else
-        Set DRec = opndbaseFMIS.Execute("Select left(Accountcode,3) as childcode,sum(Debit) as sumdebit,sum(credit) as sumcredit From tblAMIS_tmpjournal Where [dvno]='" & txtJEVNo.Text & "' group by Dvno,left(Accountcode,3)")
-    If DRec.RecordCount > 0 Then
-        For x = 1 To DRec.RecordCount
+        Set Drec = opndbaseFMIS.Execute("Select left(Accountcode,3) as childcode,sum(Debit) as sumdebit,sum(credit) as sumcredit From tblAMIS_tmpjournal Where [dvno]='" & txtJEVNo.Text & "' group by Dvno,left(Accountcode,3)")
+    If Drec.RecordCount > 0 Then
+        For x = 1 To Drec.RecordCount
             'MSFlexGrid1.TextMatrix(x, 0) = DRec![Trnno]
             
-            MSFlexGrid1.TextMatrix(x, 1) = DRec!childcode
-            MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByAccountcode(DRec!childcode)
-            MSFlexGrid1.TextMatrix(x, 4) = IIf((Format(DRec!sumCredit, "#,##0.00") = "0.00"), "", Format(DRec!sumCredit, "#,##0.00"))
-            MSFlexGrid1.TextMatrix(x, 3) = IIf((Format(DRec!sumDebit, "#,##0.00") = "0.00"), "", Format(DRec!sumDebit, "#,##0.00"))
+            MSFlexGrid1.TextMatrix(x, 1) = Drec!childcode
+            MSFlexGrid1.TextMatrix(x, 2) = GetAccountNameByAccountcode(Drec!childcode)
+            MSFlexGrid1.TextMatrix(x, 4) = IIf((Format(Drec!sumCredit, "#,##0.00") = "0.00"), "", Format(Drec!sumCredit, "#,##0.00"))
+            MSFlexGrid1.TextMatrix(x, 3) = IIf((Format(Drec!sumDebit, "#,##0.00") = "0.00"), "", Format(Drec!sumDebit, "#,##0.00"))
             MSFlexGrid1.Rows = MSFlexGrid1.Rows + 1
             'If LCase(Trim(lblMode.Caption)) = "edit" Then MSFlexGrid1.TextMatrix(x, 5) = DRec!ActionCode  ' for coloraly purpose
-            DRec.MoveNext
+            Drec.MoveNext
         Next x
     End If
     End If
     Call GetSum
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
 End Sub
 
 Public Function LoadAcctngEntries(ByVal dvno As String)
-Dim DRec As New ADODB.Recordset
+Dim Drec As New ADODB.Recordset
 Dim rec As New ADODB.Recordset
 Dim x As Integer
-    DRec.Open ("Select ChildAccountcode,Debit ,Credit From tblAMIS_AccoutingEntries Where [reffno]='" & dvno & "' And (ActionCode=1) "), opndbaseFMIS, adOpenStatic, adLockOptimistic
-    If DRec.RecordCount > 0 Then
+    Drec.Open ("Select ChildAccountcode,Debit ,Credit From tblAMIS_AccoutingEntries Where [reffno]='" & dvno & "' And (ActionCode=1) "), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    If Drec.RecordCount > 0 Then
         If EditCount = False Then
         EditCount = True
             rec.Open "Select dvno from tblAMIs_tmpjournal where dvno = '" & dvno & "'", opndbaseFMIS, adOpenStatic
             If rec.RecordCount > 0 Then
                     If MsgBox("This transaction Have a temporary Accounting Entries, do you want to Delete?", vbCritical + vbYesNo, "System Information") = vbYes Then
                         opndbaseFMIS.Execute "Delete from tblAMIs_tmpjournal where Dvno = '" & dvno & "'"
-                        For x = 1 To DRec.RecordCount
+                        For x = 1 To Drec.RecordCount
                         DoEvents
-                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(DRec!childaccountcode) & "'," & DRec!Debit & "," & DRec!Credit & ")"
-                            DRec.MoveNext
+                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(Drec!childaccountcode) & "'," & Drec!Debit & "," & Drec!Credit & ")"
+                            Drec.MoveNext
                         Next x
                     End If
             Else
-            For x = 1 To DRec.RecordCount
+            For x = 1 To Drec.RecordCount
                         DoEvents
-                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(DRec!childaccountcode) & "'," & DRec!Debit & "," & DRec!Credit & ")"
-                            DRec.MoveNext
+                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(Drec!childaccountcode) & "'," & Drec!Debit & "," & Drec!Credit & ")"
+                            Drec.MoveNext
                         Next x
             End If
             rec.Close
@@ -1529,18 +1529,18 @@ Dim x As Integer
             If rec.RecordCount > 0 Then
                     If MsgBox("This transaction Have a temporary Accounting Entries, do you want to Delete?", vbCritical + vbYesNo, "System Information") = vbYes Then
                         opndbaseFMIS.Execute "Delete from tblAMIs_tmpjournal where Dvno = '" & dvno & "'"
-                        For x = 1 To DRec.RecordCount
+                        For x = 1 To Drec.RecordCount
                         DoEvents
-                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(DRec!childaccountcode) & "'," & DRec!Debit & "," & DRec!Credit & ")"
-                            DRec.MoveNext
+                            opndbaseFMIS.Execute "Insert into tblAMIs_tmpjournal (Dvno,Accountcode,Debit,Credit) values ('" & Trim(dvno) & "','" & Trim(Drec!childaccountcode) & "'," & Drec!Debit & "," & Drec!Credit & ")"
+                            Drec.MoveNext
                         Next x
                     End If
             End If
             rec.Close
         End If
     End If
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
 End Function
 
 
@@ -1565,7 +1565,7 @@ Dim Jrec As New ADODB.Recordset
 Dim xCode As String
 
     GetNewJEV = ""
-    xCode = GetFundCODE(txtfund.Text) & "-" & Format(Now, "yy-mm") & "-" & JournalCode
+    xCode = GetFundCODE(txtFund.Text) & "-" & Format(Now, "yy-mm") & "-" & JournalCode
     Jrec.Open ("Select * from tblAMIS_JournalEntry where JEVNo like '" & xCode & "%' Order by trnno desc"), opndbaseFMIS, adOpenStatic, adLockOptimistic
     If Jrec.RecordCount > 0 Then
         GetNewJEV = xCode & "-" & Format(CInt(Right(Jrec!jevno, 3)) + 1, "000")
@@ -1617,11 +1617,11 @@ Dim xType As Integer, coloraly_signal As Integer
                 txtClaimant.Text = ""
                 txtClaimantCode.Text = ""
                 txtRC.Text = ""
-                txtParticular.Text = ""
+                txtparticular.Text = ""
                 'txtFund.Text = ""
                 txtAmount.Text = ""
                 txtJEVNo.Text = ""
-                txtdate.Text = Format(Now, "MMMM dd, yyyy")
+                txtDate.Text = Format(Now, "MMMM dd, yyyy")
                 optCollection.Value = True
                 chkSTP.Value = 0
                 Call SetGrid
@@ -1637,8 +1637,8 @@ Dim xType As Integer, coloraly_signal As Integer
                 
                     If MsgBox("Are you sure you want to save this transaction?", vbQuestion + vbYesNo) = vbYes Then
                         Call SaveAcctngEntries(txtJEVNo.Text)
-                        Call GEtCompleteJEVDetails(txtJEVNo.Text, "Reffno", txtdate.Text, "", "" _
-                            , Replace(txtParticular.Text, "'", "''"), txtJEVNo.Text, "", "", txtAmount.Text, "0", "0", 5, "", "", "", txtfund.Text, "", "", txtAlobs.Text, txtDVNo.Text, ExtractJEVSNo(txtJEVNo.Text), DatePost, "")
+                        Call GEtCompleteJEVDetails(txtJEVNo.Text, "Reffno", txtDate.Text, "", "" _
+                            , Replace(txtparticular.Text, "'", "''"), txtJEVNo.Text, "", "", txtAmount.Text, "0", "0", 5, "", "", "", txtFund.Text, "", "", txtAlobs.Text, txtDVNo.Text, ExtractJEVSNo(txtJEVNo.Text), DatePost, "")
                         
                         MsgBox "Successfully Save", vbInformation, "System Message"
                         XFlag = False
@@ -1651,11 +1651,11 @@ Dim xType As Integer, coloraly_signal As Integer
                         txtClaimant.Text = ""
                         txtClaimantCode.Text = ""
                         txtRC.Text = ""
-                        txtParticular.Text = ""
+                        txtparticular.Text = ""
                         'txtFund.Text = ""
                         txtAmount.Text = ""
                         txtJEVNo.Text = ""
-                        txtdate.Text = Format(Now, "MMMM dd, yyyy")
+                        txtDate.Text = Format(Now, "MMMM dd, yyyy")
                         optCollection.Value = True
                         chkSTP.Value = 0
                         Call SetGrid
@@ -1674,25 +1674,25 @@ debit_credit_error:
     
 End Sub
 Public Function SaveAcctngEntries(ByVal dvno As String)
-Dim DRec As New ADODB.Recordset
+Dim Drec As New ADODB.Recordset
 Dim rec As New ADODB.Recordset
 Dim x As Integer
 Dim xType As Integer
 If optCollection.Value = True Then xType = CInt(optCollection.Tag)
 If optOther.Value = True Then xType = CInt(optOther.Tag)
-    DRec.Open ("Select Accountcode,sum(Debit) as Debit ,sum(Credit) as Credit From tblAMIs_tmpjournal Where [dvno]='" & dvno & "' group by accountcode"), opndbaseFMIS, adOpenStatic, adLockOptimistic
-    If DRec.RecordCount > 0 Then
+    Drec.Open ("Select Accountcode,sum(Debit) as Debit ,sum(Credit) as Credit From tblAMIs_tmpjournal Where [dvno]='" & dvno & "' group by accountcode"), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    If Drec.RecordCount > 0 Then
         opndbaseFMIS.Execute "update tblAMIS_AccoutingEntries set actioncode =2 where reffno = '" & txtJEVNo.Text & "' and actioncode =1" ', datetimeentered = rtrim(ltrim(DateTimeEntered)) +'," & Format(Now, "yyyy/mm/dd hh:mm:ss AMPM") & "',userid = UserID + '," & Trim(ActiveUserID) & "'
-        For x = 1 To DRec.RecordCount
+        For x = 1 To Drec.RecordCount
             opndbaseFMIS.Execute "Insert into tblAMIS_AccoutingEntries (reffNo,ChildAccountcode,debit,credit,actioncode,datetimeentered,transtype,userid) values " & _
-            "('" & Trim(txtJEVNo.Text) & "','" & Trim(DRec!accountcode) & "'," & DRec!Debit & "," & DRec!Credit & ",1,'" & Format(Now, "yyyy/mm/dd hh:mm:ss AMPM") & "'," & xType & ",'" & Trim(ActiveUserID) & "')"
-            DRec.MoveNext
+            "('" & Trim(txtJEVNo.Text) & "','" & Trim(Drec!accountcode) & "'," & Drec!Debit & "," & Drec!Credit & ",1,'" & Format(Now, "yyyy/mm/dd hh:mm:ss AMPM") & "'," & xType & ",'" & Trim(ActiveUserID) & "')"
+            Drec.MoveNext
             DoEvents
         Next x
         opndbaseFMIS.Execute "delete from tblAMIs_tmpjournal where dvno = '" & txtJEVNo.Text & "'"
     End If
-    DRec.Close
-    Set DRec = Nothing
+    Drec.Close
+    Set Drec = Nothing
 End Function
 Private Function coloraly() As Boolean
 Dim x As Integer
@@ -1714,7 +1714,7 @@ End Function
 Private Function ChkEntry() As Boolean
 
     ChkEntry = False
-    If Trim(txtDVNo.Text) <> "" And txtParticular.Text <> "" And txtfund.Text <> "" And txtAmount.Text <> "" And txtJEVNo.Text <> "" Then
+    If Trim(txtDVNo.Text) <> "" And txtparticular.Text <> "" And txtFund.Text <> "" And txtAmount.Text <> "" And txtJEVNo.Text <> "" Then
         If xDebit = xCredit And xDebit > 0 Then
         If coloraly = True Then GoTo coloraly_jmp 'coloraly consideration - set chkentry to true even if not balance
             If Format(xDebit, "###,##0.00") = Format(txtAmount.Text, "###,##0.00") Then
@@ -1849,7 +1849,7 @@ Dim str() As String
  y = 0
 
  For x = 1 To 1000
-y = Val(y) + Val(str(x))
+y = val(y) + val(str(x))
  Next x
  Exit Function
 sum:
@@ -1906,7 +1906,7 @@ Public Sub loaddt()
 Dim DVRec As New ADODB.Recordset
 Dim xAlreadyJEV As String
         CUFlag = False
-        txtParticular.Locked = True
+        txtparticular.Locked = True
         
         xNAcode = ""
         txtDVNo.Text = Trim(txtDVNo.Text)
@@ -1922,13 +1922,13 @@ Dim xAlreadyJEV As String
                            ' txtClaimant.Text = GetClaimant(DVRec!ClaimantCode)
                             'txtClaimantCode.Text = DVRec!ClaimantCode
                            ' txtRC.Text = GetOfficeName(DVRec!RCenter, "OfficeMedium")
-                            txtParticular.Text = DVRec!Particular
-                            txtfund.Text = GetFundMedium(DVRec!fundcode)
+                            txtparticular.Text = DVRec!Particular
+                            txtFund.Text = GetFundMedium(DVRec!fundcode)
                             txtAmount.Text = DVRec!amount
                             optCollection.Value = True
                             
                             Call optCollection_Click
-                            Call LoadAccountsByFund(Trim(txtfund.Text))
+                            Call LoadAccountsByFund(Trim(txtFund.Text))
                             
                             'XFlag = False
                             

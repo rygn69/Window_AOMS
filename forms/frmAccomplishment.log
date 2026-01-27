@@ -1,2 +1,2 @@
-Line 41: Class MSComCtl2.DTPicker of control DTPicker1 was not a loaded control class.
-Line 53: Class MSComCtl2.DTPicker of control DTPicker2 was not a loaded control class.
+Line 96: Class lvButton.lvButtons_H of control btnOk was not a loaded control class.
+Line 128: Class lvButton.lvButtons_H of control btnCancel was not a loaded control class.

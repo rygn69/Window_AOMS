@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "msflxgrd.ocx"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
 Begin VB.Form frmJEVPreparationforAjustment_new 
    BorderStyle     =   1  'Fixed Single
@@ -358,15 +358,15 @@ Begin VB.Form frmJEVPreparationforAjustment_new
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   11535
       _ExtentX        =   20346
-      _ExtentY        =   1482
+      _ExtentY        =   1508
       ButtonWidth     =   1032
-      ButtonHeight    =   1429
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -741,7 +741,7 @@ If IsNumeric(txtAmount.Text) = False Then
     txtAmount.SetFocus
     Exit Sub
 End If
-If Trim(txtParticular.Text) <> "" Then
+If Trim(txtparticular.Text) <> "" Then
     With frmSub3
         .isPOSTED = False
         .REFF = jevno
@@ -865,7 +865,7 @@ Dim xType As Integer, coloraly_signal As Integer
                 
 
                 
-                txtParticular.Text = ""
+                txtparticular.Text = ""
                 'txtFund.Text = ""
                 txtAmount.Text = ""
                 
@@ -876,7 +876,7 @@ Dim xType As Integer, coloraly_signal As Integer
     Case "Save":
                 If ChkEntry = True Then
                 
-                    If cmbrc.Text = "" Then
+                    If cmbRC.Text = "" Then
                         MsgBox "Please select responsibility center", vbInformation, "System Message"
                         Exit Sub
                     End If
@@ -891,7 +891,7 @@ Dim xType As Integer, coloraly_signal As Integer
                         
                             Call SaveAcctngEntries(jevno)
                             Call GEtCompleteJEVDetails_v1(jevno, "Reffno", DatePost, "", "" _
-                                , Replace(txtParticular.Text, "'", "''"), jevno, "", "", txtAmount.Text, "0", "0", 4, "", "", "", txtFund.Text, cmbrc.ItemData(cmbrc.ListIndex), "", "", txtDVNo.Text, ExtractJEVSNo(jevno), DatePost, "", Check1.Value, 1)
+                                , Replace(txtparticular.Text, "'", "''"), jevno, "", "", txtAmount.Text, "0", "0", 4, "", "", "", txtFund.Text, cmbRC.ItemData(cmbRC.ListIndex), "", "", txtDVNo.Text, ExtractJEVSNo(jevno), DatePost, "", Check1.Value, 1)
                             MsgBox "Successfully Save", vbInformation, "System Message"
                         End If
                     Else
@@ -947,7 +947,7 @@ End Function
 Private Function ChkEntry() As Boolean
 
     ChkEntry = False
-    If Trim(txtDVNo.Text) <> "" And txtParticular.Text <> "" And txtFund.Text <> "" And txtAmount.Text <> "" And jevno <> "" Then
+    If Trim(txtDVNo.Text) <> "" And txtparticular.Text <> "" And txtFund.Text <> "" And txtAmount.Text <> "" And jevno <> "" Then
         If xDebit = xCredit And xDebit > 0 Then
         If coloraly = True Then GoTo coloraly_jmp 'coloraly consideration - set chkentry to true even if not balance
             If Format(xDebit, "###,##0.00") = Format(txtAmount.Text, "###,##0.00") Then
@@ -1111,12 +1111,12 @@ End Function
 Public Sub LoadOffice()
 Dim OREc As New ADODB.Recordset
 Dim x As Integer
-cmbrc.Clear
+cmbRC.Clear
 OREc.Open ("Select distinct * FRom tblREF_AIS_Offices Order By [OfficeMedium]"), opndbaseFMIS, adOpenStatic, adLockOptimistic
 If OREc.RecordCount > 0 Then
     For x = 1 To OREc.RecordCount
-        cmbrc.AddItem OREc![OfficeMedium]
-        cmbrc.ItemData(cmbrc.NewIndex) = OREc!fmisofficeid
+        cmbRC.AddItem OREc![OfficeMedium]
+        cmbRC.ItemData(cmbRC.NewIndex) = OREc!fmisofficeid
         OREc.MoveNext
     Next x
 End If

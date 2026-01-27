@@ -1,9 +1,9 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "tabctl32.ocx"
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
-Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MShflxgd.ocx"
-Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "Tabctl32.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
+Object = "{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}#6.0#0"; "MSHFLXGD.OCX"
+Object = "{5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0"; "MSFLXGRD.ocx"
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
 Begin VB.Form frmFinalJev 
    AutoRedraw      =   -1  'True
@@ -470,7 +470,7 @@ Begin VB.Form frmFinalJev
          _ExtentX        =   450
          _ExtentY        =   635
          _Version        =   393216
-         Format          =   157614081
+         Format          =   57081857
          CurrentDate     =   40680
       End
       Begin VB.Label Label2 
@@ -799,11 +799,11 @@ Begin VB.Form frmFinalJev
       TabCaption(4)   =   "Consolidated JEV Entry "
       TabPicture(4)   =   "frmFinalJev.frx":99BB
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label18"
-      Tab(4).Control(1)=   "lblstat"
+      Tab(4).Control(0)=   "lvButtons_H1"
+      Tab(4).Control(1)=   "MSHFlexGrid3"
       Tab(4).Control(2)=   "lvButtons_H2"
-      Tab(4).Control(3)=   "MSHFlexGrid3"
-      Tab(4).Control(4)=   "lvButtons_H1"
+      Tab(4).Control(3)=   "lblstat"
+      Tab(4).Control(4)=   "Label18"
       Tab(4).ControlCount=   5
       TabCaption(5)   =   "Tab 5"
       TabPicture(5)   =   "frmFinalJev.frx":99D7
@@ -1316,7 +1316,7 @@ Begin VB.Form frmFinalJev
                Strikethrough   =   0   'False
             EndProperty
             CustomFormat    =   "yyyy"
-            Format          =   155844611
+            Format          =   57081859
             UpDown          =   -1  'True
             CurrentDate     =   40651
          End
@@ -1339,7 +1339,7 @@ Begin VB.Form frmFinalJev
                Strikethrough   =   0   'False
             EndProperty
             CustomFormat    =   "MMMM yyyy"
-            Format          =   155844611
+            Format          =   57081859
             UpDown          =   -1  'True
             CurrentDate     =   40651
          End
@@ -1519,15 +1519,15 @@ Begin VB.Form frmFinalJev
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   15180
       _ExtentX        =   26776
-      _ExtentY        =   1482
-      ButtonWidth     =   1826
-      ButtonHeight    =   1429
+      _ExtentY        =   1508
+      ButtonWidth     =   1905
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -1725,7 +1725,7 @@ Dim ifColoraly As Boolean
 Dim ifsaveamount As Boolean
 Dim SaveOk As Boolean
 Public Ttype, PClosinG As Integer
-Public Fundcode As Long
+Public fundcode As Long
 Public FundType As String
 Public EditCount, IsSaveAccntng As Boolean
 Public isPOSTED As Boolean
@@ -1752,7 +1752,7 @@ Case "Clear"
             txtJEVNo.Text = ""
             txtobrno.Text = ""
             txtOOE.ListIndex = 0
-            txtParticular.Text = ""
+            txtparticular.Text = ""
             txtptvno.Text = ""
             txtRC.ListIndex = 0
             txtrcino.Text = ""
@@ -1958,7 +1958,7 @@ Dim PRec As New ADODB.Recordset
 Dim x As Integer
 Dim Transtype As String
 Dim Postdate As String
-Dim year_ As Long
+Dim YEAR_ As Long
 Dim month_, posteD As Integer
 Dim whatfield As Integer
 Dim orderby, sqlPosted As String
@@ -1974,10 +1974,10 @@ If Option1.Value = True Then: Postdate = "year(jevdate) = " & DTPYear.Year & ""
 If Option7.Value = True Then: Postdate = "year(jevdate) = " & DTpMY.Year & " and month(jevdate) = " & DTpMY.Month & ""
 
 If Option1.Value = True Then
-year_ = DTPYear.Year
+YEAR_ = DTPYear.Year
 whatfield = 2
 Else
-year_ = DTpMY.Year
+YEAR_ = DTpMY.Year
 month_ = DTpMY.Month
 whatfield = 1
 End If
@@ -1996,7 +1996,7 @@ If field = "JEVno" Then: orderby = "substring(Jevno,14,7)"
     sqlPosted = ""
     End If
     If Check1.Value = 1 Then
-    PRec.Open ("Exec MPproc_FindpostedTransThrougObno @OBRNO ='" & txtcondition.Text & "',@transtype =  " & Transtype & ",@year = " & year_ & ",@month = '" & month_ & "',@what = " & whatfield & ""), opndbaseFMIS, adOpenStatic, adLockOptimistic
+    PRec.Open ("Exec MPproc_FindpostedTransThrougObno @OBRNO ='" & txtcondition.Text & "',@transtype =  " & Transtype & ",@year = " & YEAR_ & ",@month = '" & month_ & "',@what = " & whatfield & ""), opndbaseFMIS, adOpenStatic, adLockOptimistic
     Else
     'MsgBox "Select " & field & " as field From tblAMIS_FinalJEV Where " & field & " like '" & Condition & "%' and " & Postdate & " and transtype in (" & Transtype & ") and ltrim(" & field & ") <> '' and Actioncode=1 " & sqlPosted & "  Group By " & field & " order by " & orderby & ""
     PRec.Open ("Select " & field & " as field From tblAMIS_FinalJEV Where " & field & " like '" & Condition & "%' and " & Postdate & " and transtype in (" & Transtype & ") and ltrim(" & field & ") <> '' and Actioncode=1 " & sqlPosted & "  Group By " & field & " order by " & orderby & ""), opndbaseFMIS, adOpenStatic, adLockOptimistic
@@ -2052,7 +2052,7 @@ rec.Open "Select * from tblAMIS_FinalJEV where " & field & " = '" & Condition & 
         txtobrno.Text = IIf((Left(Trim(rec.Fields!obrno), 2) = "NA"), GetNonAlobsName(rec.Fields!obrno), rec.Fields!obrno)
         'If Left(Trim(rec.Fields!obrno), 2) = "NA" Then: txtobrno.Text = GetNonAlobsName(rec.Fields!obrno)
         txtOOE.Text = (FindField("ooe", "tblAMIS_IncomingDVTrns", "dvno", rec.Fields!dvno, "actioncode = 1"))
-        txtParticular.Text = Trim(rec.Fields!Particular)
+        txtparticular.Text = Trim(rec.Fields!Particular)
         txtptvno.Text = Trim(rec.Fields!ptvNo)
         txtgamount.Text = Format(rec.Fields!Gamount, "#,##0.00")
         txtRC.Text = GetOfficeName(IIf(Trim(rec!RCenter) = "", "0", Trim(rec!RCenter)), "OfficeMedium")
@@ -2115,7 +2115,7 @@ Private Function Clrtxt()
         txtJEVNo.Text = ""
         txtobrno.Text = ""
 '        txtooe.Text = ""
-        txtParticular.Text = ""
+        txtparticular.Text = ""
         txtptvno.Text = ""
 '        txtrc.Text = ""
         txtrcino.Text = ""
@@ -2369,7 +2369,7 @@ Select Case Button
                     MsgBox "This transaction is Already Generate the report, Unable to EDIT the transaction...!", vbInformation, "System Message"
                     Exit Sub
                 End If
-                If txtJEVNo.Text <> "" And txtjevdate.Text <> "" And txtfundtype.Text <> "" And txtcheckdate.Text <> "" And txtParticular.Text <> "" And txtgamount.Text <> "" Then
+                If txtJEVNo.Text <> "" And txtjevdate.Text <> "" And txtfundtype.Text <> "" And txtcheckdate.Text <> "" And txtparticular.Text <> "" And txtgamount.Text <> "" Then
                     If ChkEntry = True Then
                         Call SaveFinalJEV
                     Else
@@ -2433,7 +2433,7 @@ Select Case Button
                     .txtFund.Text = txtfundtype.Text
                     .ClaimantCode = ClaimantCode
                     .RCenter = txtRC.ItemData(txtRC.ListIndex)
-                    .cmbrc.Text = txtRC.Text
+                    .cmbRC.Text = txtRC.Text
                     .Show
                     End With
                 Else
@@ -2463,7 +2463,7 @@ Private Sub PrintJEV()
 Dim sql As String
     sql = "Exec Proc_JevPostedPrinting @JEVno = '" & Trim(txtJEVNo.Text) & "'"
     ReportName = "JEVNEW"
-    rptJEVNew.txtClaimDesc.SetText txtParticular.Text & ", " & txtClaimant.Text & ", " & txtobrno.Text
+    rptJEVNew.txtClaimDesc.SetText txtparticular.Text & ", " & txtClaimant.Text & ", " & txtobrno.Text
     rptJEVNew.txtRC.SetText txtRC.Text
     rptJEVNew.txtClerk.SetText getUserName(ActiveUserID, "FullName")
     rptJEVNew.Text23.SetText GetEmpPosition(ActiveUserID)
@@ -2547,7 +2547,7 @@ If MsgBox("Are You Sure Do you want to Save/Update these entry?", vbInformation 
                 End If
         End If
     End If
-                Call Saved2FinalJEV_forFinalJEV(txtcheckdate.Text, Trim(txtrcino.Text), txtCheckno.Text, txtParticular.Text, txtJEVNo.Text, ClaimantCode, 0, txtgamount.Text, 0, 0, trans, FmisVoucherno, txtDVNo.Text, txtobrno.Text, txtfundtype.Text, RCcode, txtOOE.Text, txtrdono.Text, ref, Jevseries, DTpMY.Value, txtptvno.Text, PClosinG)
+                Call Saved2FinalJEV_forFinalJEV(txtcheckdate.Text, Trim(txtrcino.Text), txtCheckno.Text, txtparticular.Text, txtJEVNo.Text, ClaimantCode, 0, txtgamount.Text, 0, 0, trans, FmisVoucherno, txtDVNo.Text, txtobrno.Text, txtfundtype.Text, RCcode, txtOOE.Text, txtrdono.Text, ref, Jevseries, DTpMY.Value, txtptvno.Text, PClosinG)
                 If Check5.Value = 1 Then
                     opndbaseFMIS.Execute "update tblAMIS_FinalJEV set HaveDoc = 1 where jevno = '" & txtJEVNo.Text & "' and actioncode = 1"
                 Else

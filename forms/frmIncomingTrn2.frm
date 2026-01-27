@@ -1,21 +1,22 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
 Begin VB.Form frmIncomingTrn 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Incoming Transaction (DV Numbering)"
-   ClientHeight    =   7665
+   ClientHeight    =   8025
    ClientLeft      =   5055
    ClientTop       =   4680
-   ClientWidth     =   13320
+   ClientWidth     =   13395
    Icon            =   "frmIncomingTrn2.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MDIChild        =   -1  'True
    MinButton       =   0   'False
-   ScaleHeight     =   7665
-   ScaleWidth      =   13320
+   ScaleHeight     =   8025
+   ScaleWidth      =   13395
    Begin VB.CheckBox chkIsCA 
       Alignment       =   1  'Right Justify
       BackColor       =   &H00000000&
@@ -232,15 +233,15 @@ Begin VB.Form frmIncomingTrn
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   7
       Top             =   0
-      Width           =   13320
-      _ExtentX        =   23495
-      _ExtentY        =   1482
-      ButtonWidth     =   1058
-      ButtonHeight    =   1429
+      Width           =   13395
+      _ExtentX        =   23627
+      _ExtentY        =   1508
+      ButtonWidth     =   1138
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -1937,7 +1938,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                         If txtObR.Text <> "" Then
                             If Edited = False Then
                                 For x = 0 To cnt
-                                    If ISAlobsAmtOkAgaintsVoucher(str(x), GetRemainingAmnt(str(x)), GetTotalTrnsactedAmt(str(x), "tblAMIS_IncomingDVTrns", "GAmount", "ObrNo"), True) = False Then
+                                    'If ISAlobsAmtOkAgaintsVoucher(str(x), GetRemainingAmnt(str(x)), GetTotalTrnsactedAmt(str(x), "tblAMIS_IncomingDVTrns", "GAmount", "ObrNo"), True) = False Then ' marpaul code
+                                    If ISAlobsAmtOkAgaintsVoucher(str(x), CCur(txtAmount.Text), GetTotalTrnsactedAmt(str(x), "tblAMIS_IncomingDVTrns", "GAmount", "ObrNo"), True) = False Then 'xXx code
                                         Exit Sub
                                     End If
                                 Next x

@@ -1,2 +1,5 @@
-Line 262: Class MSComctlLib.ProgressBar of control ProgressBar1 was not a loaded control class.
-Line 397: Class MSComctlLib.ProgressBar of control progStat was not a loaded control class.
+Line 142: Class lvButton.lvButtons_H of control lvButtons_H4 was not a loaded control class.
+Line 276: Class lvButton.lvButtons_H of control lvButtons_H1 was not a loaded control class.
+Line 308: Class lvButton.lvButtons_H of control lvButtons_H2 was not a loaded control class.
+Line 340: Class lvButton.lvButtons_H of control lvButtons_H5 was not a loaded control class.
+Line 365: Class lvButton.lvButtons_H of control lvButtons_H3 was not a loaded control class.

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
 Begin VB.Form frmCDClaimantRegistry 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Claimant Entry Form"
@@ -1234,13 +1234,13 @@ Dim x
 If Len(txt_search.Text) <> 0 Then
     opnOther.Open "Select ClaimantCode,trnno,case when left('" & identifier & "',1) = 'O'  then (case when rtrim(ltrim(isnull(suffix,' '))) <> '' then lastname + ', ' + firstname + ' '  + Mi + ', ' + suffix else lastname + ', ' + firstname + ' '  + Mi end)else lastname end as Name  from tblCMS_CDClaimantDetails where ClaimantCode like '" & identifier & "%' and lastname like '" & Replace(txt_search.Text, "'", "''") & "%' order by lastname,firstname", opndbaseFMIS, adOpenStatic, adLockOptimistic
 Else
-    opnOther.Open "Select ClaimantCode,trnno,case when left('" & identifier & "',1) = 'O' then (case when rtrim(ltrim(suffix)) <> '' then lastname + ', ' + firstname + ' '  + Mi + ', ' + suffix else lastname + ', ' + firstname + ' '  + Mi end) else lastname end as Name from tblCMS_CDClaimantDetails where ClaimantCode like '" & identifier & "%' order by lastname,firstname", opndbaseFMIS, adOpenStatic, adLockOptimistic
+    opnOther.Open "Select ClaimantCode,trnno,case when left('" & identifier & "',1) = 'O' then (case when rtrim(ltrim(suffix)) <> '' then lastname + ', ' + firstname + ' '  + Mi + ', ' + suffix else lastname + ', ' + firstname + ' '  + Mi end) else lastname end as Name from tblCMS_CDClaimantDetails where ClaimantCode like '" & identifier & "%'  order by lastname,firstname", opndbaseFMIS, adOpenStatic, adLockOptimistic
 End If
 
 If opnOther.RecordCount <> 0 Then
    ListView1.ListItems.Clear
     Do Until opnOther.EOF
-         Set x = ListView1.ListItems.Add(, , UCase(opnOther!name))
+         Set x = ListView1.ListItems.Add(, , UCase(IIf(IsNull(opnOther!name), "", opnOther!name)))
         x.SubItems(1) = opnOther!ClaimantCode
         opnOther.MoveNext
         cc = cc + 1

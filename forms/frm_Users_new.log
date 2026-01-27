@@ -1,5 +1,3 @@
-Line 46: Class MSComctlLib.ListView of control lstuser was not a loaded control class.
-Line 295: Class MSComctlLib.ImageList of control itb32x32 was not a loaded control class.
-Line 377: Class MSComctlLib.Toolbar of control Toolbar1 was not a loaded control class.
-Line 437: Class MSComctlLib.ListView of control lstfullnode was not a loaded control class.
-Line 518: Class MSComctlLib.ListView of control lstUsernode was not a loaded control class.
+Line 37: Class lvButton.lvButtons_H of control lvButtons_H1 was not a loaded control class.
+Line 492: Class lvButton.lvButtons_H of control lvButtons_H2 was not a loaded control class.
+Line 573: Class lvButton.lvButtons_H of control lvButtons_H3 was not a loaded control class.
