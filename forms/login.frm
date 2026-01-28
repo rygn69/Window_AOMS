@@ -12,7 +12,6 @@ Begin VB.Form frmUserPassword
    Icon            =   "login.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
-   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Picture         =   "login.frx":09EA
@@ -99,19 +98,21 @@ Begin VB.Form frmUserPassword
       Width           =   6195
       Begin VB.TextBox Text2 
          Height          =   375
-         Left            =   1800
+         Left            =   0
          TabIndex        =   17
          Text            =   "Text2"
          Top             =   1800
-         Width           =   855
+         Visible         =   0   'False
+         Width           =   150
       End
       Begin VB.TextBox Text1 
          Height          =   495
-         Left            =   1800
+         Left            =   0
          TabIndex        =   16
          Text            =   "Text1"
          Top             =   1080
-         Width           =   735
+         Visible         =   0   'False
+         Width           =   150
       End
       Begin VB.TextBox SwipeIDNo_txt 
          Alignment       =   2  'Center
@@ -607,6 +608,6 @@ If KeyCode = 13 Then
 End If
 End Sub
 
-Private Sub Text1_Change()
+Private Sub text1_Change()
 Text2.Text = mydll.Decrypt(UCase(Text1.Text))
 End Sub

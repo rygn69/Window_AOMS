@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "Mscomct2.ocx"
 Begin VB.Form frm_main 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Downloading the update"
@@ -63,7 +63,8 @@ Option Explicit
 Private Sub Form_Load()
 Dim dbFMIS As String
 'dbFMIS = readTXTDATA("Database Type", "FMIS", App.Path & "\data\SystemDefault.ini")
-strConnString = "Provider=SQLOLEDB.1;Password=(@/51u0#2@3n8D0e1L1#0u1R;Persist Security Info=True;User ID=pgasis;Data Source=192.168.2.1\pgas"
+'strConnString = "Provider=SQLOLEDB.1;Password=(@/51u0#2@3n8D0e1L1#0u1R;Persist Security Info=True;User ID=pgasis;Data Source=192.168.2.1\pgas"
+strConnString = "Provider=SQLOLEDB.1;Password=T9v#qE1r@Lx8Zp!f;Persist Security Info=True;User ID=proc;Initial Catalog=fmis;Data Source=vm_db_pmis.pgas.ph"
 '-----------------------------
 'PAYROLL
 'exeID = 2
