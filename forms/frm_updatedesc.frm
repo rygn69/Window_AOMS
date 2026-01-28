@@ -9,6 +9,7 @@ Begin VB.Form frm_updatedesc
    ClientWidth     =   7575
    Icon            =   "frm_updatedesc.frx":0000
    LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Picture         =   "frm_updatedesc.frx":1042

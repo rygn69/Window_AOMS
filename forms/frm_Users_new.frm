@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
-Object = "{1693405E-2DC9-4248-B52F-4AC9145DA2AF}#1.0#0"; "WinXPC Engine.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "Mscomctl.ocx"
+Object = "{1693405E-2DC9-4248-B52F-4AC9145DA2AF}#1.0#0"; "WinXPCEngine.ocx"
 Object = "{0C8DE9F2-EAFC-44DF-A13F-B5A9B36ED780}#2.0#0"; "lvButton.ocx"
 Begin VB.Form frmSystemUsers_new 
    BorderStyle     =   1  'Fixed Single
@@ -376,15 +376,15 @@ Begin VB.Form frmSystemUsers_new
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
-      Height          =   840
+      Height          =   855
       Left            =   0
       TabIndex        =   8
       Top             =   0
       Width           =   13515
       _ExtentX        =   23839
-      _ExtentY        =   1482
-      ButtonWidth     =   1058
-      ButtonHeight    =   1429
+      _ExtentY        =   1508
+      ButtonWidth     =   1138
+      ButtonHeight    =   1455
       Appearance      =   1
       Style           =   1
       ImageList       =   "itb32x32"
@@ -626,19 +626,19 @@ Public isNew As Boolean
 Public isAdmin As Integer
 Private Sub Check1_Click()
 Dim val As Integer
-If Txt_UserId.Text <> "" Then
+If txt_userid.Text <> "" Then
     If Check1.Tag = "edit" Then
         If SystemAdmin = 1 Then
             If Check1.Value = 1 Then
                 If MsgBox("Are you sure you want to make as ADMINISTRATOR this user?", vbInformation + vbYesNo, "System Confirmation") = vbYes Then
-                    opndbaseFMIS.Execute ("update tblAMIS_UserRegistry set admin = 1 where UserID = '" & Txt_UserId.Text & "' and actioncode = 1")
+                    opndbaseFMIS.Execute ("update tblAMIS_UserRegistry set admin = 1 where UserID = '" & txt_userid.Text & "' and actioncode = 1")
                 Else
                 Check1.Tag = "a"
                     Check1.Value = isAdmin
                 End If
             Else
                 If MsgBox("Are you sure you want to make as SIMPLE USER?", vbInformation + vbYesNo, "System Confirmation") = vbYes Then
-                    opndbaseFMIS.Execute ("update tblAMIS_UserRegistry set admin = 0 where UserID = '" & Txt_UserId.Text & "' and actioncode = 1")
+                    opndbaseFMIS.Execute ("update tblAMIS_UserRegistry set admin = 0 where UserID = '" & txt_userid.Text & "' and actioncode = 1")
                 Else
                     Check1.Tag = "a"
                     Check1.Value = isAdmin
@@ -664,7 +664,7 @@ Private Sub lstuser_Click()
 'On Error Resume Next
 isNew = False
 Frame1.Enabled = False
-Txt_UserId.Text = lstuser.SelectedItem.Text
+txt_userid.Text = lstuser.SelectedItem.Text
 txt_Username.Text = lstuser.SelectedItem.ListSubItems(1).Text
 txt_Password.Text = mydll.Decrypt(Trim(lstuser.SelectedItem.ListSubItems(3).Text))
 txtRpassword.Text = mydll.Decrypt(Trim(lstuser.SelectedItem.ListSubItems(3).Text))
@@ -693,10 +693,10 @@ If MsgBox("Are you sure do you want to ADD the selected nodes?", vbInformation +
     CheckIFAlreadyInUserLst = False
     For x = 1 To lstfullnode.ListItems.Count
         If lstfullnode.ListItems(x).Checked = True Then
-        opndbaseFMIS.Execute "Insert into  [fmis].[dbo].[tblAMIS_Usernodes]([UserID],[SubnodeID]) values ('" & Txt_UserId.Text & "','" & lstfullnode.ListItems(x).ListSubItems(4).Text & "')"
+        opndbaseFMIS.Execute "Insert into  [fmis].[dbo].[tblAMIS_Usernodes]([UserID],[SubnodeID]) values ('" & txt_userid.Text & "','" & lstfullnode.ListItems(x).ListSubItems(4).Text & "')"
         End If
     Next x
-    opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & Txt_UserId.Text & "'"
+    opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & txt_userid.Text & "'"
     Call LoadFullnode
     Call LoadUserFullnode
 End If
@@ -704,9 +704,9 @@ End Sub
 Private Function SaveInNOde()
 Dim x As Long
 Dim y As Long
-opndbaseFMIS.Execute "delete from  [fmis].[dbo].[tblAMIS_Usernodes] where [UserID] ='" & Txt_UserId.Text & "'"
+opndbaseFMIS.Execute "delete from  [fmis].[dbo].[tblAMIS_Usernodes] where [UserID] ='" & txt_userid.Text & "'"
 For x = 1 To lstfullnode.ListItems.Count
-    opndbaseFMIS.Execute "Insert into  [fmis].[dbo].[tblAMIS_Usernodes]([UserID],[SubnodeID]) values ('" & Txt_UserId.Text & "','" & lstfullnode.ListItems(x).ListSubItems(4).Text & "')"
+    opndbaseFMIS.Execute "Insert into  [fmis].[dbo].[tblAMIS_Usernodes]([UserID],[SubnodeID]) values ('" & txt_userid.Text & "','" & lstfullnode.ListItems(x).ListSubItems(4).Text & "')"
     DoEvents
 Next x
 End Function
@@ -717,10 +717,10 @@ Dim y
 If MsgBox("Are you sure do you want to Delete the selected nodes?", vbInformation + vbYesNo, "Syste Message") = vbYes Then
     For x = 1 To lstUsernode.ListItems.Count
         If lstUsernode.ListItems(x).Checked = True Then
-            opndbaseFMIS.Execute "Delete from  tblAMIS_Usernodes where userid = '" & Txt_UserId.Text & "' and subnodeID = '" & lstUsernode.ListItems(x).ListSubItems(4).Text & "'"
+            opndbaseFMIS.Execute "Delete from  tblAMIS_Usernodes where userid = '" & txt_userid.Text & "' and subnodeID = '" & lstUsernode.ListItems(x).ListSubItems(4).Text & "'"
         End If
     Next x
-    opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & Txt_UserId.Text & "'"
+    opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & txt_userid.Text & "'"
     LoadUserFullnode
     LoadFullnode
 End If
@@ -781,28 +781,28 @@ Check1.Tag = "edit"
     Select Case Button:
     Case "New":
         txtclear
-        Txt_UserId.Enabled = True
+        txt_userid.Enabled = True
         Frame1.Enabled = True
         isNew = True
     Case "Save":
         If isNew = True Then
         
-        Set rec = opndbaseFMIS.Execute("Select * from tblAMIS_UserRegistry where userid = '" & Txt_UserId.Text & "' and actioncode = 1")
+        Set rec = opndbaseFMIS.Execute("Select * from tblAMIS_UserRegistry where userid = '" & txt_userid.Text & "' and actioncode = 1")
                 If rec.RecordCount > 0 Then
                 MsgBox "User ID Already in the database", vbInformation, "System Message"
                 Else
                     If MsgBox("Are you sure do you want to save?", vbInformation + vbYesNo, "System Message") = vbYes Then
                         If txt_Password.Text = txtRpassword Then
-                            If Trim(Txt_UserId.Text) <> "" And Trim(txt_Password.Text) <> "" And Trim(txt_Username.Text) <> "" Then
+                            If Trim(txt_userid.Text) <> "" And Trim(txt_Password.Text) <> "" And Trim(txt_Username.Text) <> "" Then
                             opndbaseFMIS.Execute "Insert into tblAMIS_UserRegistry ([UserID],[UserName],[UserPassword],[Actioncode],[enteredbyUserid],[DateTimeEntered],admin) " & _
-                            "values ('" & Txt_UserId.Text & "','" & Trim(txt_Username.Text) & "','" & mydll.Encrypt(UCase(txt_Password.Text)) & "',1,'" & ActiveUserID & "','" & Now & "','" & admin & "')"
+                            "values ('" & txt_userid.Text & "','" & Trim(txt_Username.Text) & "','" & mydll.Encrypt(UCase(txt_Password.Text)) & "',1,'" & ActiveUserID & "','" & Now & "','" & admin & "')"
                             LoadUser
                             Call LoadFullnode
                             Check1.Tag = "a"
                             If Check1.Value = 1 Then
                                 SaveInNOde
                                 LoadUserFullnode
-                                opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & Txt_UserId.Text & "'"
+                                opndbaseFMIS.Execute "EXECUTE  [fmis].[dbo].[MPfunc_LoadfullnodeByUserID] @userID = '" & txt_userid.Text & "'"
                             Else
                             MsgBox "Successfully save, Please assign to her/his nodes..", vbInformation, "System Message"
                             End If
@@ -818,7 +818,7 @@ Check1.Tag = "edit"
                 End If
         Else
                     If MsgBox("Are you sure do you want to Update the password?", vbInformation + vbYesNo, "System Confirmation") = vbYes Then
-                    opndbaseFMIS.Execute "Update tblAMIS_UserRegistry set userpassword = '" & mydll.Encrypt(UCase(txt_Password.Text)) & "' where userid = '" & Trim(Txt_UserId) & "' and actioncode =1"
+                    opndbaseFMIS.Execute "Update tblAMIS_UserRegistry set userpassword = '" & mydll.Encrypt(UCase(txt_Password.Text)) & "' where userid = '" & Trim(txt_userid) & "' and actioncode =1"
                     MsgBox "Successfully Update", vbInformation, "System Message"
                     End If
         End If
@@ -828,7 +828,7 @@ ret:
              Inpot = InputBox("ENTER User Password:", "Password Verification")
                 If UCase(Inpot) = txt_Password.Text Then
                      Frame1.Enabled = True
-                     Txt_UserId.Enabled = False
+                     txt_userid.Enabled = False
                 Else
                     If MsgBox("Invalid password", vbCritical + vbRetryCancel, "System Messagse") = vbRetry Then
                         GoTo ret
@@ -839,8 +839,8 @@ ret:
     Case "Delete":
                 If isNew = False Then
                     If MsgBox("Are you sure do you want to delete this account?", vbInformation + vbYesNo, "System Confirmation") = vbYes Then
-                        opndbaseFMIS.Execute "Update tblAMIS_UserRegistry set actioncode  =2 where userid = '" & Txt_UserId.Text & "' and actioncode = 1"
-                        opndbaseFMIS.Execute "delete from  tblAMIS_Usernodes  where userid = '" & Txt_UserId.Text & "'"
+                        opndbaseFMIS.Execute "Update tblAMIS_UserRegistry set actioncode  =2 where userid = '" & txt_userid.Text & "' and actioncode = 1"
+                        opndbaseFMIS.Execute "delete from  tblAMIS_Usernodes  where userid = '" & txt_userid.Text & "'"
                         txtclear
                         LoadUser
                     End If
@@ -856,7 +856,7 @@ bad:
 End Sub
 Private Function txtclear()
 txt_Password.Text = ""
-Txt_UserId.Text = ""
+txt_userid.Text = ""
 txt_Username.Text = ""
 txtRpassword.Text = ""
 lstfullnode.ListItems.Clear
@@ -866,7 +866,7 @@ Public Sub LoadFullnode()
 Dim x As Long
 Dim y
 Dim rec As New ADODB.Recordset
-Set rec = opndbaseFMIS.Execute("SELECT  [ID],[Fullnodes],[Subnode1],[Subnode2],[Subnode3],[lvl]  FROM [fmis].[dbo].[tblAMIS_tempNodes] where id not in (SELECT [SubnodeID] FROM [fmis].[dbo].[tblAMIS_Usernodes] where userID ='" & Txt_UserId.Text & "') order by subnode1,subnode2")
+Set rec = opndbaseFMIS.Execute("SELECT  [ID],[Fullnodes],[Subnode1],[Subnode2],[Subnode3],[lvl]  FROM [fmis].[dbo].[tblAMIS_tempNodes] where id not in (SELECT [SubnodeID] FROM [fmis].[dbo].[tblAMIS_Usernodes] where userID ='" & txt_userid.Text & "') order by subnode1,subnode2")
 lstfullnode.ListItems.Clear
 If rec.RecordCount > 0 Then
     For x = 1 To rec.RecordCount
@@ -884,7 +884,7 @@ Public Sub LoadUserFullnode()
 Dim x As Long
 Dim y
 Dim rec As New ADODB.Recordset
-Set rec = opndbaseFMIS.Execute("SELECT  [ID],[Fullnodes],[Subnode1],[Subnode2],[Subnode3],[lvl]  FROM [fmis].[dbo].[tblAMIS_tempNodes] where id in (SELECT [SubnodeID] FROM [fmis].[dbo].[tblAMIS_Usernodes] where userID ='" & Txt_UserId.Text & "') order by id")
+Set rec = opndbaseFMIS.Execute("SELECT  [ID],[Fullnodes],[Subnode1],[Subnode2],[Subnode3],[lvl]  FROM [fmis].[dbo].[tblAMIS_tempNodes] where id in (SELECT [SubnodeID] FROM [fmis].[dbo].[tblAMIS_Usernodes] where userID ='" & txt_userid.Text & "') order by id")
 lstUsernode.ListItems.Clear
 If rec.RecordCount > 0 Then
     For x = 1 To rec.RecordCount
@@ -919,7 +919,7 @@ End Sub
 Private Sub LoadUserIntxt()
 Dim opnuser As New ADODB.Recordset
 
-opnuser.Open "Select * from pmis.dbo.Employee where SwipEmployeeID='" & Txt_UserId.Text & "'", opndbaseFMIS, adOpenStatic, adLockOptimistic
+opnuser.Open "Select * from pmis.dbo.Employee where SwipEmployeeID='" & txt_userid.Text & "'", opndbaseFMIS, adOpenStatic, adLockOptimistic
     
     If opnuser.RecordCount <> 0 Then
         txt_Username.Text = UCase(opnuser!Firstname & " " & IIf(Len(Trim(opnuser!MI)) = 0, "", Left(opnuser!MI, 1) & ".") & " " & opnuser!Lastname & " " & IIf(Len(Trim(IIf(IsNull(opnuser!Suffix), "", opnuser!Suffix))) = 0, "", "," & opnuser!Suffix))

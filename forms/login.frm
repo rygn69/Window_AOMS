@@ -5,18 +5,19 @@ Begin VB.Form frmUserPassword
    BackColor       =   &H00004080&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "User Login"
-   ClientHeight    =   4815
+   ClientHeight    =   4770
    ClientLeft      =   3840
    ClientTop       =   3045
-   ClientWidth     =   6300
+   ClientWidth     =   6285
    Icon            =   "login.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Picture         =   "login.frx":09EA
-   ScaleHeight     =   4815
-   ScaleWidth      =   6300
+   ScaleHeight     =   4770
+   ScaleWidth      =   6285
    StartUpPosition =   1  'CenterOwner
    Begin VB.PictureBox Picture1 
       Appearance      =   0  'Flat
